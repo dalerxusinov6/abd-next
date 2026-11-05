@@ -69,7 +69,7 @@ export default async function Home() {
           <div className="bento bento-3">
             <div className="card" data-reveal=""><div className="stat-num"><Count value={stats.projects} /><sup>+</sup></div><p>Muvaffaqiyatli yakunlangan loyihalar</p></div>
             <div className="card" data-reveal="" data-delay=".08"><div className="stat-num"><Count value={stats.clients} /><sup>+</sup></div><p>Biz bilan qayta ishlayotgan mijozlar</p></div>
-            <div className="card" data-reveal="" data-delay=".16"><div className="stat-num">2019</div><p>Faoliyatimiz boshlangan yil — <Count value={stats.years} /> yillik tajriba</p></div>
+            <div className="card" data-reveal="" data-delay=".16"><div className="stat-num">2023</div><p>Faoliyatimiz boshlangan yil — <Count value={stats.years} /> yillik tajriba</p></div>
             <div className="card team-mini" data-reveal="" data-delay=".08">
               <div className="avatars">
                 {team.slice(0, 3).map((m) => <span key={m.id} style={{ background: m.color }} title={m.name}>{m.photo ? <img src={m.photo} alt="" /> : initials(m.name)}</span>)}

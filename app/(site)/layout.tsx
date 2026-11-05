@@ -39,7 +39,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           </div>
           <div className="footer-big" aria-hidden="true">abd group</div>
           <div className="footer-bottom">
-            <span>© 2019–{new Date().getFullYear()} ABD Group. Barcha huquqlar himoyalangan.</span>
+            <span>© 2023–{new Date().getFullYear()} ABD Group. Barcha huquqlar himoyalangan.</span>
             <nav><a href="#">Foydalanish shartlari</a><a href="#">Maxfiylik siyosati</a></nav>
             <div className="socials">
               <Social name="Telegram" d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.5-.6-.2L6.2 13.1l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5L20.4 2.8c.9-.3 1.7.2 1.5 1.5z" />

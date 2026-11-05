@@ -11,12 +11,11 @@ const VALUES = [
   ["Shaffoflik", "Har hafta hisobot va demo. Pulingiz nimaga ketayotganini doim bilasiz.", "M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"],
 ];
 const TIMELINE = [
-  ["2019", "Boshlanish", "Uch do'st kichik ofisda birinchi lending sahifalarni yaratishni boshladi."],
-  ["2021", "Birinchi yirik mijoz", "Redmar uchun brend va CRM tizimi — jamoa 6 kishiga yetdi."],
-  ["2023", "Mobil yo'nalish", "Flutter va React Native bo'yicha alohida bo'lim ochdik. G'azna Bank bilan hamkorlik boshlandi."],
-  ["2025", "100+ loyiha", "Logitech UZ, Maktab TOP va boshqa brendlar bilan yuzinchi loyihamizni nishonladik."],
+  ["2023", "Boshlanish", "Kichik jamoa sifatida birinchi lending sahifalar va brending loyihalarini yaratishni boshladik."],
+  ["2024", "Birinchi yirik mijozlar", "Redmar uchun brend va CRM tizimi, Highline va Maktab TOP loyihalari — jamoa kengaydi."],
+  ["2025", "Mobil yo'nalish va 100+ loyiha", "Mobil ilovalar bo'limini ochdik, G'azna Bank va Logitech UZ bilan hamkorlik qildik."],
   ["2026", "Xalqaro bozor", "Qozog'iston va BAA'dagi mijozlar uchun mahsulotlar yaratyapmiz. Keyingisi — sizning loyihangiz."],
-];
+]
 
 export default async function AboutPage() {
   const content = await readContent();
@@ -24,7 +23,7 @@ export default async function AboutPage() {
   const team = byOrder(content.team);
   return (
     <>
-      <PageHero crumb="Biz haqimizda" title="Biz — *ABD Group*|raqamli studiya" lead={`2019-yilda uch kishilik jamoa sifatida boshlaganmiz. Bugun ${s.team}+ mutaxassis O'zbekiston va xorijdagi brendlar uchun mahsulot yaratadi.`} />
+      <PageHero crumb="Biz haqimizda" title="Biz — *ABD Group*|raqamli studiya" lead={`2023-yilda kichik jamoa sifatida boshlaganmiz. Bugun ${s.team}+ mutaxassis O'zbekiston va xorijdagi brendlar uchun mahsulot yaratadi.`} />
       <section className="section" style={{ paddingTop: 20 }}>
         <div className="container">
           <div className="stats" data-stagger="">
