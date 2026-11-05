@@ -1,0 +1,546 @@
+{
+  "projects": [
+    {
+      "id": "p1",
+      "slug": "gazna-bank-app",
+      "name": "G'azna Bank",
+      "type": "Mobil ilova",
+      "category": "mobile",
+      "year": 2025,
+      "client": "G'azna Bank",
+      "duration": "4 oy",
+      "description": "Bank mijozlari uchun mobil ilova: tezkor o'tkazmalar, kartalarni boshqarish va shaxsiy moliya tahlili.",
+      "task": "Eski ilova sekin ishlardi va foydalanuvchilar o'tkazma qilish uchun 6 ta ekrandan o'tishi kerak edi. Bank yosh auditoriyani jalb qiladigan zamonaviy ilova istadi.",
+      "solution": "Biz o'tkazmani 2 bosqichga qisqartirdik, biometrik kirish va bitta bosishda to'lov shablonlarini qo'shdik. 40+ ekran yagona dizayn tizimida yig'ildi.",
+      "services": [
+        "UX tadqiqot",
+        "UI dizayn",
+        "Dizayn tizim",
+        "Flutter"
+      ],
+      "results": [
+        {
+          "value": "2x",
+          "label": "Tezroq o'tkazma"
+        },
+        {
+          "value": "4.9",
+          "label": "App Store reytingi"
+        },
+        {
+          "value": "+65%",
+          "label": "Faol foydalanuvchilar"
+        }
+      ],
+      "color": "#1d3b8b",
+      "accent": "#60a5fa",
+      "visual": "phone",
+      "logoText": "",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 0
+    },
+    {
+      "id": "p2",
+      "slug": "maktab-top",
+      "name": "Maktab TOP",
+      "type": "Veb dizayn",
+      "category": "web",
+      "year": 2024,
+      "client": "Maktab TOP",
+      "duration": "2 oy",
+      "description": "Maktablar reytingi va ota-onalar uchun qidiruv platformasi.",
+      "task": "Ota-onalar farzandi uchun maktab tanlashda ishonchli ma'lumot topa olmasdi. Ma'lumotlar tarqoq va eskirgan edi.",
+      "solution": "Filtrlar, xarita va har bir maktab uchun alohida sahifali platforma yaratdik. Ma'lumotlar admin panel orqali yangilanadi.",
+      "services": [
+        "Veb dizayn",
+        "Next.js",
+        "Admin panel"
+      ],
+      "results": [
+        {
+          "value": "1200+",
+          "label": "Maktablar bazasi"
+        },
+        {
+          "value": "80k",
+          "label": "Oylik tashrif"
+        },
+        {
+          "value": "3.2 daq",
+          "label": "O'rtacha sessiya"
+        }
+      ],
+      "color": "#cbd5e1",
+      "accent": "#0f172a",
+      "visual": "laptop",
+      "logoText": "",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 1
+    },
+    {
+      "id": "p3",
+      "slug": "highline",
+      "name": "Highline",
+      "type": "Brending",
+      "category": "branding",
+      "year": 2024,
+      "client": "Highline",
+      "duration": "6 hafta",
+      "description": "Fintech startapi uchun logotip, ranglar palitrasi, tipografika va brendbuk.",
+      "task": "Yangi fintech startapiga investorlar va mijozlar oldida jiddiy, lekin zamonaviy ko'rinadigan brend kerak edi.",
+      "solution": "Tezlik va o'sishni ifodalovchi belgi, cheklangan rang palitrasi va qat'iy tipografik tizim ishlab chiqdik. Brendbuk 60 sahifadan iborat.",
+      "services": [
+        "Logotip",
+        "Brendbuk",
+        "Taqdimot"
+      ],
+      "results": [
+        {
+          "value": "60",
+          "label": "Sahifalik brendbuk"
+        },
+        {
+          "value": "$1.2M",
+          "label": "Jalb qilingan investitsiya"
+        },
+        {
+          "value": "6",
+          "label": "Hafta"
+        }
+      ],
+      "color": "#0b2b24",
+      "accent": "#10b981",
+      "visual": "logo",
+      "logoText": "▞ highline",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 2
+    },
+    {
+      "id": "p4",
+      "slug": "roll-biscuit",
+      "name": "Roll Biscuit",
+      "type": "Qadoq dizayni",
+      "category": "branding",
+      "year": 2023,
+      "client": "Roll Biscuit",
+      "duration": "1 oy",
+      "description": "Pechenye mahsulotlari uchun yorqin qadoq seriyasi.",
+      "task": "Do'kon peshtaxtasida mahsulot raqobatchilar orasida ko'rinmay qolardi.",
+      "solution": "6 ta ta'm uchun yorqin, bir-biridan oson ajraladigan qadoq seriyasini yaratdik.",
+      "services": [
+        "Qadoq",
+        "Illyustratsiya",
+        "Bosma"
+      ],
+      "results": [
+        {
+          "value": "6",
+          "label": "Ta'm seriyasi"
+        },
+        {
+          "value": "+30%",
+          "label": "Sotuv o'sishi"
+        },
+        {
+          "value": "12",
+          "label": "Do'kon tarmog'i"
+        }
+      ],
+      "color": "#f7b2c9",
+      "accent": "#fde68a",
+      "visual": "logo",
+      "logoText": "Roll",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 3
+    },
+    {
+      "id": "p5",
+      "slug": "forest-cabin",
+      "name": "Forest Cabin",
+      "type": "Lending",
+      "category": "web",
+      "year": 2025,
+      "client": "Cabin Rent",
+      "duration": "3 hafta",
+      "description": "Tog'dagi dam olish uylari uchun bron qilish lendingi.",
+      "task": "Mijozlar Instagram orqali bron qilardi — bu ko'p vaqt olardi va buyurtmalar yo'qolardi.",
+      "solution": "Atmosferik vizual, onlayn kalendar va to'lov bilan bitta sahifali bron qilish saytini yaratdik.",
+      "services": [
+        "Lending",
+        "Bron tizimi",
+        "Animatsiya"
+      ],
+      "results": [
+        {
+          "value": "3",
+          "label": "Hafta"
+        },
+        {
+          "value": "+120%",
+          "label": "Bronlar"
+        },
+        {
+          "value": "0",
+          "label": "Yo'qolgan buyurtma"
+        }
+      ],
+      "color": "#1b2537",
+      "accent": "#f97316",
+      "visual": "logo",
+      "logoText": "The Perfect Cabin",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 4
+    },
+    {
+      "id": "p6",
+      "slug": "redmar",
+      "name": "Redmar",
+      "type": "Brending · CRM",
+      "category": "crm",
+      "year": 2023,
+      "client": "Redmar",
+      "duration": "3 oy",
+      "description": "Savdo tarmog'i uchun brend yangilanishi va ichki CRM tizimi.",
+      "task": "Buyurtmalar, ombor va hisobotlar Excel fayllarda yuritilardi — xatolar ko'p edi.",
+      "solution": "Barcha jarayonlarni bitta panelga yig'adigan CRM va Telegram bot yaratdik. Brend ham yangilandi.",
+      "services": [
+        "Brending",
+        "CRM",
+        "Telegram bot"
+      ],
+      "results": [
+        {
+          "value": "100%",
+          "label": "Qog'ozsiz"
+        },
+        {
+          "value": "2x",
+          "label": "Tezroq buyurtma"
+        },
+        {
+          "value": "35",
+          "label": "Filial ulandi"
+        }
+      ],
+      "color": "#d92626",
+      "accent": "#ffffff",
+      "visual": "logo",
+      "logoText": "⊇ redmar",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 5
+    },
+    {
+      "id": "p7",
+      "slug": "la-vida",
+      "name": "La Vida",
+      "type": "Brending",
+      "category": "branding",
+      "year": 2024,
+      "client": "La Vida Residence",
+      "duration": "5 hafta",
+      "description": "Turar-joy majmuasi uchun premium brend identifikatsiyasi.",
+      "task": "Premium turar-joy majmuasi bozorda boshqa qurilishlardan ajralib turishi kerak edi.",
+      "solution": "Nafis belgi, tinch ranglar va sotuv bo'limi uchun to'liq materiallar to'plamini ishlab chiqdik.",
+      "services": [
+        "Brend",
+        "Bosma",
+        "Sotuv materiallari"
+      ],
+      "results": [
+        {
+          "value": "5",
+          "label": "Hafta"
+        },
+        {
+          "value": "40+",
+          "label": "Materiallar"
+        },
+        {
+          "value": "70%",
+          "label": "Oldindan sotuv"
+        }
+      ],
+      "color": "#0f3f3b",
+      "accent": "#2dd4bf",
+      "visual": "logo",
+      "logoText": "lavida",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 6
+    },
+    {
+      "id": "p8",
+      "slug": "logitech",
+      "name": "Logitech",
+      "type": "e-Commerce",
+      "category": "web",
+      "year": 2025,
+      "client": "Logitech UZ",
+      "duration": "3 oy",
+      "description": "Rasmiy distribyutor uchun internet-do'kon.",
+      "task": "Rasmiy distribyutorda onlayn sotuv kanali yo'q edi, mijozlar marketpleyslarga ketardi.",
+      "solution": "Katalog, savat, Payme/Click integratsiyasi va admin panelli internet-do'kon yaratdik.",
+      "services": [
+        "e-Commerce",
+        "To'lov integratsiyasi",
+        "Admin panel"
+      ],
+      "results": [
+        {
+          "value": "800+",
+          "label": "Mahsulot"
+        },
+        {
+          "value": "+3x",
+          "label": "Onlayn sotuv"
+        },
+        {
+          "value": "1.2s",
+          "label": "Yuklanish vaqti"
+        }
+      ],
+      "color": "#7c5cf0",
+      "accent": "#fbcfe8",
+      "visual": "laptop",
+      "logoText": "",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 7
+    },
+    {
+      "id": "p9",
+      "slug": "gazna-bank-web",
+      "name": "G'azna Bank",
+      "type": "Veb dizayn",
+      "category": "web",
+      "year": 2025,
+      "client": "G'azna Bank",
+      "duration": "2 oy",
+      "description": "Bankning korporativ veb-sayti.",
+      "task": "Bank sayti eskirgan, mobil qurilmalarda noqulay va arizalar faqat filialda qabul qilinardi.",
+      "solution": "Kredit kalkulyatori, filiallar xaritasi va onlayn arizali yangi korporativ sayt yaratdik.",
+      "services": [
+        "Veb dizayn",
+        "Dasturlash",
+        "SEO"
+      ],
+      "results": [
+        {
+          "value": "+50%",
+          "label": "Onlayn arizalar"
+        },
+        {
+          "value": "98",
+          "label": "Lighthouse"
+        },
+        {
+          "value": "2",
+          "label": "Oy"
+        }
+      ],
+      "color": "#2563eb",
+      "accent": "#ffffff",
+      "visual": "laptop",
+      "logoText": "",
+      "cover": null,
+      "gallery": [],
+      "published": true,
+      "order": 8
+    }
+  ],
+  "clients": [
+    {
+      "id": "c1",
+      "name": "logitech",
+      "logo": null,
+      "url": "",
+      "order": 0
+    },
+    {
+      "id": "c2",
+      "name": "redmar",
+      "logo": null,
+      "url": "",
+      "order": 1
+    },
+    {
+      "id": "c3",
+      "name": "highline",
+      "logo": null,
+      "url": "",
+      "order": 2
+    },
+    {
+      "id": "c4",
+      "name": "G'azna Bank",
+      "logo": null,
+      "url": "",
+      "order": 3
+    },
+    {
+      "id": "c5",
+      "name": "Maktab TOP",
+      "logo": null,
+      "url": "",
+      "order": 4
+    },
+    {
+      "id": "c6",
+      "name": "Arshpool",
+      "logo": null,
+      "url": "",
+      "order": 5
+    },
+    {
+      "id": "c7",
+      "name": "Bek & Sons",
+      "logo": null,
+      "url": "",
+      "order": 6
+    },
+    {
+      "id": "c8",
+      "name": "La Vida",
+      "logo": null,
+      "url": "",
+      "order": 7
+    }
+  ],
+  "faq": [
+    {
+      "id": "f1",
+      "question": "Ishlaringizning o'ziga xosligi nimada?",
+      "answer": "Har bir loyihani biznes maqsadlaridan boshlaymiz: tadqiqot, prototip, dizayn va dasturlash bitta jamoada bajariladi — shuning uchun natija tez va izchil.",
+      "order": 0
+    },
+    {
+      "id": "f2",
+      "question": "Pulni qaytarib berasizmi?",
+      "answer": "Ha. Agar birinchi bosqich natijasi sizni qoniqtirmasa, oldindan to'lovni to'liq qaytaramiz.",
+      "order": 1
+    },
+    {
+      "id": "f3",
+      "question": "Qanday to'lov turlarini qabul qilasiz?",
+      "answer": "Bank o'tkazmasi, Payme, Click, Uzcard/Humo kartalari va xalqaro mijozlar uchun Visa/Mastercard.",
+      "order": 2
+    },
+    {
+      "id": "f4",
+      "question": "Loyiha qancha vaqt oladi?",
+      "answer": "Lending sahifa — 1–2 hafta, korporativ sayt — 3–6 hafta, mobil ilova yoki CRM — 2–4 oy.",
+      "order": 3
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "Abdulloh Ergashev",
+      "role": "Grafik dizayner · Mijoz",
+      "text": "ABD Group bilan ishlash juda qulay bo'ldi. Saytimiz muddatidan oldin tayyor bo'ldi va sotuvlar 40% oshdi.",
+      "color": "#22d3ee",
+      "order": 0
+    },
+    {
+      "id": "t2",
+      "name": "Madina Karimova",
+      "role": "Highline · Asoschi",
+      "text": "Brendimizni noldan yaratib berishdi. Har bir detalga e'tibor va professional yondashuv — tavsiya qilaman!",
+      "color": "#a78bfa",
+      "order": 1
+    },
+    {
+      "id": "t3",
+      "name": "Sardor Rahimov",
+      "role": "Redmar · Direktor",
+      "text": "CRM tizimi tufayli omborxona va buyurtmalarni boshqarish ikki baravar tezlashdi. Rahmat, jamoa!",
+      "color": "#fbbf24",
+      "order": 2
+    },
+    {
+      "id": "t4",
+      "name": "Nodira Tursunova",
+      "role": "G'azna Bank · Mahsulot menejeri",
+      "text": "Mobil ilovamiz dizayni foydalanuvchilardan juda ko'p ijobiy fikr oldi. App Store reytingi 4.9 ga chiqdi.",
+      "color": "#4ade80",
+      "order": 3
+    },
+    {
+      "id": "t5",
+      "name": "Jasur Bekov",
+      "role": "Bek & Sons · CEO",
+      "text": "Tez javob, aniq muddatlar va ajoyib natija. Keyingi loyihani ham albatta shu jamoa bilan qilamiz.",
+      "color": "#f472b6",
+      "order": 4
+    }
+  ],
+  "messages": [],
+  "subscribers": [],
+  "settings": {
+    "heroWords": [
+      "veb-saytlar",
+      "mobil ilovalar",
+      "brendlar",
+      "CRM tizimlar",
+      "UI/UX dizayn"
+    ],
+    "stats": {
+      "projects": 120,
+      "clients": 48,
+      "years": 7,
+      "team": 12
+    },
+    "phone": "+998 90 123 45 67",
+    "email": "hello@abdgroup.uz",
+    "telegram": "@abdgroup",
+    "address": "Toshkent, O'zbekiston"
+  },
+  "team": [
+    {
+      "id": "u1",
+      "name": "Daler Xusinov",
+      "role": "Asoschi · CEO",
+      "photo": null,
+      "color": "#0e7490",
+      "order": 0
+    },
+    {
+      "id": "u2",
+      "name": "Abdulloh Ergashev",
+      "role": "Art direktor",
+      "photo": null,
+      "color": "#6d28d9",
+      "order": 1
+    },
+    {
+      "id": "u3",
+      "name": "Sevara Mirzayeva",
+      "role": "Lead UI/UX dizayner",
+      "photo": null,
+      "color": "#047857",
+      "order": 2
+    },
+    {
+      "id": "u4",
+      "name": "Bobur Toshmatov",
+      "role": "Tech Lead",
+      "photo": null,
+      "color": "#b45309",
+      "order": 3
+    }
+  ]
+}
