@@ -401,7 +401,6 @@ html [data-reveal].in { opacity: 1; transform: none; }
 .testi-track { display: flex; gap: 16px; transition: transform .8s var(--ease); }
 .testi { flex: 0 0 calc((100% - 32px) / 3); padding: 32px; display: flex; flex-direction: column; gap: 28px; min-height: 280px; }
 .testi blockquote { font-size: 17px; line-height: 1.6; }
-.testi .stars { color: #fbbf24; letter-spacing: 3px; font-size: 14px; }
 .person { display: flex; align-items: center; gap: 14px; margin-top: auto; }
 .person .av { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #021; }
 .person b { display: block; font-size: 15px; }

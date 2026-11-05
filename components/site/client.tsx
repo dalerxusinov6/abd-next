@@ -142,7 +142,6 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
         >
           {items.map((t) => (
             <div className="card testi" key={t.id}>
-              <div className="stars">★★★★★</div>
               <blockquote>“{t.text}”</blockquote>
               <div className="person">
                 <span className="av" style={{ background: t.color }}>{t.name.split(" ").map((s) => s[0]).slice(0, 2).join("")}</span>
