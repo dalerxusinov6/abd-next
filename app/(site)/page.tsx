@@ -78,7 +78,7 @@ export default async function Home() {
               </svg>
               <p>{stats.team}+ dizayner, dasturchi va menejer</p>
             </div>
-            <div className="card b-wide" data-reveal="" data-delay=".16"><div className="stat-num">0<sup> pudratchi</sup></div><p>Strategiya, dizayn, dasturlash va CRM — hammasini o&apos;z jamoamiz bajaradi</p></div>
+            <div className="card b-wide" data-reveal="" data-delay=".16"><div className="stat-num">0 <span className="stat-accent">pudratchi</span></div><p>Strategiya, dizayn, dasturlash va CRM — hammasini o&apos;z jamoamiz bajaradi</p></div>
           </div>
         </div>
       </section>

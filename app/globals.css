@@ -256,6 +256,7 @@ html [data-reveal].in { opacity: 1; transform: none; }
 .bento .b-tall .h-2 { font-size: clamp(20px, 1.7vw, 24px); }
 .stat-num { font-family: var(--font-display); font-weight: 600; font-size: clamp(44px, 5vw, 72px); letter-spacing: -.03em; line-height: 1; }
 .stat-num sup { font-size: .45em; vertical-align: top; color: var(--cyan); }
+.stat-num .stat-accent { color: var(--cyan); }
 
 .orb-visual { position: absolute; right: -40px; top: -40px; width: 260px; height: 260px; border-radius: 50%; pointer-events: none; }
 .orb-visual i { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(255,255,255,.08); animation: spin 30s linear infinite; }
