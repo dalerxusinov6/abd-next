@@ -27,7 +27,7 @@ export default async function Home() {
               <span className="hl" data-reveal="">Biznesingiz</span>
               <span className="hl" data-reveal="" data-delay=".08">uchun</span>
               <span className="hl" data-reveal="" data-delay=".16"><Rotator words={heroWords.length ? heroWords : ["yechimlar"]} /></span>
-              <span className="hl" data-reveal="" data-delay=".24">yaratamiz<i className="caret" aria-hidden="true" /></span>
+              <span className="hl" data-reveal="" data-delay=".24">ishlab chiqamiz<i className="caret" aria-hidden="true" /></span>
             </h1>
             <p className="lead" data-reveal="" data-delay=".35">G&apos;oyadan ishga tushirishgacha — strategiya, dizayn va dasturlash bitta jamoada.</p>
             <div className="hero-cta" data-reveal="" data-delay=".45">

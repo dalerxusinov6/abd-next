@@ -16,7 +16,7 @@ export default async function SettingsAdmin() {
         <div className="a-card">
           <h2>Bosh sahifa</h2>
           <label className="a-field">
-            <span className="a-label">&quot;Biznesingiz uchun ___ yaratamiz&quot; — almashinadigan so&apos;zlar</span>
+            <span className="a-label">&quot;Biznesingiz uchun ___ ishlab chiqamiz&quot; — almashinadigan so&apos;zlar</span>
             <textarea name="heroWords" defaultValue={s.heroWords.join("\n")} style={{ minHeight: 130 }} />
             <small className="a-hint">Har bir qatorga bitta so&apos;z yoki ibora</small>
           </label>
