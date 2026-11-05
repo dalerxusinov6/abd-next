@@ -173,7 +173,7 @@ export default function SiteEffects() {
           if (d < R) { near = 1 - d / R; const f = near * 26; gx += (dx / (d || 1)) * f; gy += (dy / (d || 1)) * f; }
           p.x += (gx - p.x) * 0.12; p.y += (gy - p.y) * 0.12;
           const a = 0.08 + wave * 0.12 + near * 0.7;
-          ctx.fillStyle = near > 0.05 ? `rgba(34,211,238,${a})` : `rgba(255,255,255,${a})`;
+          ctx.fillStyle = near > 0.05 ? `rgba(0,200,255,${a})` : `rgba(255,255,255,${a})`;
           ctx.beginPath(); ctx.arc(p.x, p.y, 1.1 + near * 1.6, 0, 6.283); ctx.fill();
         }
       };

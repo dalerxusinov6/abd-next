@@ -27,7 +27,7 @@ export default async function ContactPage() {
               <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                 <defs><pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0v20" fill="none" stroke="rgba(255,255,255,.05)" /></pattern></defs>
                 <rect width="400" height="320" fill="url(#g)" />
-                <path d="M-10 200 Q100 150 200 170 T420 120" stroke="rgba(34,211,238,.25)" strokeWidth="14" fill="none" />
+                <path d="M-10 200 Q100 150 200 170 T420 120" stroke="rgba(0,200,255,.25)" strokeWidth="14" fill="none" />
                 <path d="M120 -10 L160 330" stroke="rgba(255,255,255,.08)" strokeWidth="10" />
                 <path d="M-10 80 L410 110" stroke="rgba(255,255,255,.08)" strokeWidth="8" />
                 <path d="M300 -10 L260 330" stroke="rgba(255,255,255,.06)" strokeWidth="6" />

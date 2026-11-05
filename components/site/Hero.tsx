@@ -125,7 +125,7 @@ export function LogoParticles() {
         let hot = false;
         if (d2 < R * R) { const d = Math.sqrt(d2) || 1, f = (1 - d / R) * 6; p.vx += (dx / d) * f; p.vy += (dy / d) * f; hot = true; }
         p.vx *= 0.86; p.vy *= 0.86; p.x += p.vx; p.y += p.vy;
-        ctx.fillStyle = hot || Math.abs(p.vx) + Math.abs(p.vy) > 3 ? "#22d3ee" : p.c;
+        ctx.fillStyle = hot || Math.abs(p.vx) + Math.abs(p.vy) > 3 ? "#00c8ff" : p.c;
         ctx.fillRect(p.x, p.y, p.s, p.s);
       }
     };

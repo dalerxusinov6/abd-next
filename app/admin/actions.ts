@@ -105,7 +105,7 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
       services: s(fd, "services", 600).split(",").map((x) => x.trim()).filter(Boolean).slice(0, 12),
       results,
       color: color(fd, "color", "#1d3b8b"),
-      accent: color(fd, "accent", "#22d3ee"),
+      accent: color(fd, "accent", "#00c8ff"),
       visual: (VISUALS as readonly string[]).includes(visual) ? visual : "logo",
       logoText: s(fd, "logoText", 60),
       published: fd.get("published") === "on",
@@ -209,7 +209,7 @@ export async function saveTestimonial(_prev: ActionState, fd: FormData): Promise
   await requireAdmin();
   const id = s(fd, "id", 40), name = s(fd, "name", 120), text = s(fd, "text", 1200);
   if (!name || !text) return fail("Ism va fikr matnini kiriting.");
-  const data = { name, text, role: s(fd, "role", 160), color: color(fd, "color", "#22d3ee") };
+  const data = { name, text, role: s(fd, "role", 160), color: color(fd, "color", "#00c8ff") };
   const err = await save((c) => {
     const ex = id ? c.testimonials.find((x) => x.id === id) : undefined;
     if (ex) Object.assign(ex, data);

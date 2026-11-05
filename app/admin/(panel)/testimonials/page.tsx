@@ -10,7 +10,7 @@ const Fields = ({ t }: { t?: Testimonial }) => (
     <div className="a-grid three">
       <label className="a-field"><span className="a-label">Ism *</span><input name="name" required defaultValue={t?.name} maxLength={120} /></label>
       <label className="a-field"><span className="a-label">Lavozim · Kompaniya</span><input name="role" defaultValue={t?.role} maxLength={160} /></label>
-      <label className="a-field"><span className="a-label">Avatar rangi</span><input type="color" name="color" defaultValue={t?.color ?? "#22d3ee"} /></label>
+      <label className="a-field"><span className="a-label">Avatar rangi</span><input type="color" name="color" defaultValue={t?.color ?? "#00c8ff"} /></label>
     </div>
     <label className="a-field"><span className="a-label">Fikr matni *</span><textarea name="text" required defaultValue={t?.text} maxLength={1200} /></label>
   </>

@@ -51,7 +51,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       </footer>
 
       <button className="to-top" type="button" aria-label="Yuqoriga">
-        <svg viewBox="0 0 52 52" style={{ position: "absolute", inset: 0, width: "100%", transform: "rotate(-90deg)" }}><circle cx="26" cy="26" r="24" fill="none" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="150.8" strokeDashoffset="150.8" /></svg>
+        <svg viewBox="0 0 52 52" style={{ position: "absolute", inset: 0, width: "100%", transform: "rotate(-90deg)" }}><circle cx="26" cy="26" r="24" fill="none" stroke="#00c8ff" strokeWidth="1.5" strokeDasharray="150.8" strokeDashoffset="150.8" /></svg>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
       </button>
       <div className="toast" role="status" aria-live="polite" />

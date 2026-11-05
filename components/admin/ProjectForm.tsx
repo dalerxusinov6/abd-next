@@ -62,7 +62,7 @@ export default function ProjectForm({ p }: { p?: Project }) {
             <div className="a-form">
               <div className="a-grid">
                 <F label="Fon rangi"><input type="color" name="color" defaultValue={p?.color ?? "#1d3b8b"} /></F>
-                <F label="Aksent rangi"><input type="color" name="accent" defaultValue={p?.accent ?? "#22d3ee"} /></F>
+                <F label="Aksent rangi"><input type="color" name="accent" defaultValue={p?.accent ?? "#00c8ff"} /></F>
               </div>
               <F label="Muqova bo'lmasa — maket turi">
                 <select name="visual" defaultValue={p?.visual ?? "logo"}>
