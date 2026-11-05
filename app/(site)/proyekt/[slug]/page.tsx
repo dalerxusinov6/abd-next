@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { byOrder, readContent } from "@/lib/store";
-import { Arrow, Eyebrow, Split, WorkArt } from "@/components/site/ui";
+import { Arrow, Eyebrow, Roll, Split, WorkArt } from "@/components/site/ui";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -33,6 +33,11 @@ export default async function ProjectPage({ params }: Props) {
           <Link href="/portfolio" className="back" data-reveal=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>Barcha loyihalar</Link>
           <Split as="h1" className="h-display" text={p.name} />
           <p className="lead" data-reveal="" data-delay=".3">{p.description}</p>
+          {p.url && (
+            <div className="p-visit" data-reveal="" data-delay=".4">
+              <a href={p.url} className="btn btn-primary" target="_blank" rel="noopener noreferrer"><Roll>Saytga o&apos;tish</Roll><Arrow /></a>
+            </div>
+          )}
           <div className="p-meta" data-stagger="">
             <div><small>Mijoz</small><b>{p.client}</b></div>
             <div><small>Yo&apos;nalish</small><b>{p.type}</b></div>

@@ -94,11 +94,13 @@ export function FaqList({ items }: { items: Faq[] }) {
   return (
     <div className="faq">
       {items.map((f, i) => (
-        <div key={f.id} className={`faq-item${open === f.id ? " open" : ""}`} data-reveal="" style={{ transitionDelay: `${i * 0.08}s` }}>
+        <div key={f.id} data-reveal="" style={{ transitionDelay: `${i * 0.08}s` }}>
+        <div className={`faq-item${open === f.id ? " open" : ""}`}>
           <button className="faq-q" type="button" aria-expanded={open === f.id} onClick={() => setOpen(open === f.id ? null : f.id)}>
             {f.question}<span className="ic" />
           </button>
           <div className="faq-a"><div><p>{f.answer}</p></div></div>
+        </div>
         </div>
       ))}
     </div>

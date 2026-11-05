@@ -98,6 +98,7 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
       year: int(fd, "year", new Date().getFullYear()),
       client: s(fd, "client", 120),
       duration: s(fd, "duration", 40),
+      url: safeUrl(s(fd, "url", 300)),
       description: s(fd, "description", 600),
       task: s(fd, "task", 3000),
       solution: s(fd, "solution", 3000),

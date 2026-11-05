@@ -22,6 +22,8 @@ export type Project = {
   year: number;
   client: string;
   duration: string;
+  /** Live site / store link; shows a "Saytga o'tish" button. */
+  url?: string;
   description: string;
   task: string;
   solution: string;

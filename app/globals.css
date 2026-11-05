@@ -654,6 +654,7 @@ a.work { color: inherit; }
 .p-hero .back:hover { color: var(--text); gap: 14px; }
 .p-hero .back svg { width: 18px; }
 .p-hero h1 { margin: 26px 0 18px; font-size: clamp(48px, 9vw, 140px); }
+.p-visit { margin-top: 32px; }
 .p-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; }
 .p-meta small { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; color: var(--dim); margin-bottom: 6px; }
 .p-meta b { font-weight: 600; font-size: 17px; }
