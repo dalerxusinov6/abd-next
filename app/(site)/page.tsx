@@ -6,12 +6,6 @@ import { LogoParticles, Rotator } from "@/components/site/Hero";
 import { SERVICES } from "@/lib/services";
 
 const HOME_SIZES = ["w-5 tall", "w-7", "w-7", "w-5", "w-6", "w-6"];
-const USP = [
-  ["Hammasi bir joyda", "Strategiya, dizayn, dasturlash va CRM — pudratchilarsiz, bitta jamoada."],
-  ["Shaxsiy menejer", "Har loyihada bitta mas'ul inson: savolingizga tez va aniq javob."],
-  ["Shaffof jarayon", "Har bosqichda oraliq natijani ko'rib, fikr bildirib borasiz."],
-  ["Ishga tushgandan keyin ham", "Qo'llab-quvvatlash va rivojlantirishda yoningizda qolamiz."],
-] as const;
 const TECH = ["Figma", "React", "Next.js", "Python", "Flutter", "Node.js", "Laravel"];
 
 export default async function Home() {
@@ -84,14 +78,7 @@ export default async function Home() {
               </svg>
               <p>{stats.team}+ dizayner, dasturchi va menejer</p>
             </div>
-            <div className="card b-wide usp-card" data-reveal="" data-delay=".16">
-              <h3 className="usp-title">G&apos;oyadan ishga tushirishgacha — <em>bitta jamoa</em></h3>
-              <ol className="usp-list">
-                {USP.map(([t, d], i) => (
-                  <li key={t}><span className="usp-num">0{i + 1}</span><b>{t}</b><p>{d}</p></li>
-                ))}
-              </ol>
-            </div>
+            <div className="card b-wide" data-reveal="" data-delay=".16"><div className="stat-num">0<sup> pudratchi</sup></div><p>Strategiya, dizayn, dasturlash va CRM — hammasini o&apos;z jamoamiz bajaradi</p></div>
           </div>
         </div>
       </section>
