@@ -771,15 +771,16 @@ html .p-cover[data-reveal] { transition: clip-path 1.4s var(--ease-in-out), opac
 .avatars span img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* team card icon */
-.team-icon { width: 168px; height: 90px; overflow: visible; margin: 4px 0 0 8px; }
-.team-icon .ti-p { stroke: var(--muted); transform-box: fill-box; transform-origin: 50% 100%; }
+.team-icon { --h: clamp(48px, 5.4vw, 78px); height: var(--h); width: calc(var(--h) * 1.875); overflow: visible; }
+.team-icon .ti-p { stroke: var(--text); transform-box: fill-box; transform-origin: 50% 100%; }
 .team-icon .ti-c { stroke: var(--cyan); animation: tiBob 3.6s ease-in-out infinite; }
 .team-icon .ti-l { animation: tiBob 3.6s ease-in-out -1.2s infinite; }
 .team-icon .ti-r { animation: tiBob 3.6s ease-in-out -2.4s infinite; }
 .team-icon .ti-link { stroke: var(--cyan); stroke-dasharray: 3 5; opacity: 0; transition: opacity .5s; animation: tiFlow 1.2s linear infinite; }
+.team-icon .ti-link { stroke-width: 3; }
 .team-icon .ti-dot { fill: var(--cyan); opacity: 0; transform: translateY(6px); transition: opacity .4s, transform .6s var(--ease); }
-.team-mini:hover .ti-l { translate: -8px -3px; stroke: var(--text); }
-.team-mini:hover .ti-r { translate: 8px -3px; stroke: var(--text); }
+.team-mini:hover .ti-l { translate: -8px -3px; }
+.team-mini:hover .ti-r { translate: 8px -3px; }
 .team-mini:hover .ti-c { scale: 1.08; }
 .team-mini:hover .ti-link, .team-mini:hover .ti-dot { opacity: 1; }
 .team-mini:hover .ti-dot { transform: none; }
