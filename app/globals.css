@@ -746,12 +746,6 @@ html .p-cover[data-reveal] { transition: clip-path 1.4s var(--ease-in-out), opac
 /* ---------- about bento (simple) ---------- */
 .about-intro .eyebrow { margin-bottom: 4px; }
 .about-intro .h-2 { max-width: 22ch; }
-.avatars span { transition: margin .5s var(--ease); }
-.team-mini:hover .avatars span { margin-left: -4px; }
-.team-mini:hover .avatars span:first-child { margin-left: 0; }
-.client-row { display: flex; flex-wrap: wrap; gap: 10px 26px; font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -.02em; color: var(--dim); }
-.client-row span { transition: color .3s; }
-.client-row span:hover { color: var(--text); }
 .bento-3 { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 1024px) { .bento-3 { grid-template-columns: repeat(2, 1fr); } .bento-3 .b-wide { grid-column: span 2; } }
 @media (max-width: 680px) { .bento-3 { grid-template-columns: 1fr; } .bento-3 .b-wide { grid-column: span 1; } }
@@ -760,8 +754,6 @@ html .p-cover[data-reveal] { transition: clip-path 1.4s var(--ease-in-out), opac
 .work-art .cover-img, .p-gallery .shot img, .p-cover .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .partner img { max-height: 44px; max-width: 70%; object-fit: contain; opacity: .7; transition: opacity .3s, transform .5s var(--ease); }
 .partner:hover img { opacity: 1; transform: scale(1.06); }
-.client-row img { height: 28px; width: auto; opacity: .6; transition: opacity .3s; }
-.client-row img:hover { opacity: 1; }
 .form-error { color: #f87171; font-size: 14px; }
 .empty-note { color: var(--muted); padding: 40px 0; }
 
@@ -788,3 +780,24 @@ html .p-cover[data-reveal] { transition: clip-path 1.4s var(--ease-in-out), opac
 @keyframes tiBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
 @keyframes tiFlow { to { stroke-dashoffset: -16; } }
 @media (prefers-reduced-motion: reduce) { .team-icon * { animation: none !important; } }
+
+/* about bento: USP card */
+.bento-3 { grid-auto-rows: minmax(220px, auto); }
+.bento .usp-card { justify-content: flex-start; gap: 28px; }
+.usp-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15; letter-spacing: -.03em; }
+.usp-title em { font-style: normal; color: var(--cyan); }
+.usp-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+.usp-list li { padding: 0 20px; border-left: 1px solid var(--line); transition: border-color .4s; }
+.usp-list li:hover { border-color: var(--cyan); }
+.usp-num { display: block; font-size: 12px; letter-spacing: .16em; color: var(--cyan); margin-bottom: 14px; }
+.usp-list b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: -.02em; margin-bottom: 8px; }
+.usp-list p { color: var(--muted); line-height: 1.55; }
+.usp-list li:first-child { padding-left: 0; border-left: 0; }
+.bento .usp-list p { font-size: 14px; max-width: none; }
+@media (max-width: 1024px) and (min-width: 681px) { .usp-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 0; } .usp-list li:nth-child(3) { padding-left: 0; border-left: 0; } }
+@media (max-width: 680px) {
+  .usp-list { grid-template-columns: 1fr; }
+  .usp-list li { display: grid; grid-template-columns: 34px 1fr; padding: 16px 0; border-left: 0; border-top: 1px solid var(--line); }
+  .usp-list li:first-child { padding-top: 0; border-top: 0; }
+  .usp-num { grid-row: span 2; margin: 4px 0 0; }
+}
