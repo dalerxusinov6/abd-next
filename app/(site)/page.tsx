@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { byOrder, readContent } from "@/lib/store";
-import { Arrow, Btn, CtaBox, Eyebrow, Split, WorkCard, initials } from "@/components/site/ui";
+import { Arrow, Btn, CtaBox, Eyebrow, Split, WorkCard } from "@/components/site/ui";
 import { Count, FaqList, Testimonials } from "@/components/site/client";
 import { LogoParticles, Rotator } from "@/components/site/Hero";
 import { SERVICES } from "@/lib/services";
@@ -13,8 +13,6 @@ export default async function Home() {
   const projects = byOrder(c.projects.filter((p) => p.published)).slice(0, 6);
   const clients = byOrder(c.clients);
   const { stats, heroWords } = c.settings;
-  const team = byOrder(c.team);
-  const extra = Math.max(0, stats.team - Math.min(3, team.length));
 
   return (
     <>
@@ -71,10 +69,13 @@ export default async function Home() {
             <div className="card" data-reveal="" data-delay=".08"><div className="stat-num"><Count value={stats.clients} /><sup>+</sup></div><p>Biz bilan qayta ishlayotgan mijozlar</p></div>
             <div className="card" data-reveal="" data-delay=".16"><div className="stat-num">2023</div><p>Faoliyatimiz boshlangan yil — <Count value={stats.years} /> yillik tajriba</p></div>
             <div className="card team-mini" data-reveal="" data-delay=".08">
-              <div className="avatars">
-                {team.slice(0, 3).map((m) => <span key={m.id} style={{ background: m.color }} title={m.name}>{m.photo ? <img src={m.photo} alt="" /> : initials(m.name)}</span>)}
-                {extra > 0 && <span style={{ background: "#4ade80" }}>+{extra}</span>}
-              </div>
+              <svg className="team-icon" viewBox="0 0 120 64" fill="none" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+                <path className="ti-link" d="M20 12 Q60 -14 100 12" />
+                <g className="ti-p ti-l"><circle cx="30" cy="22" r="8" /><path d="M14 54c0-9 7-15 16-15s16 6 16 15" /></g>
+                <g className="ti-p ti-r"><circle cx="90" cy="22" r="8" /><path d="M74 54c0-9 7-15 16-15s16 6 16 15" /></g>
+                <g className="ti-p ti-c"><circle cx="60" cy="18" r="10" /><path d="M40 58c0-11 9-19 20-19s20 8 20 19" /></g>
+                <circle className="ti-dot" cx="60" cy="-1" r="2.6" />
+              </svg>
               <p>{stats.team}+ dizayner, dasturchi va menejer</p>
             </div>
             <div className="card b-wide clients-mini" data-reveal="" data-delay=".16">
