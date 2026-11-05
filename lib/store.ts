@@ -34,7 +34,9 @@ async function blobRead(): Promise<{ content: Content; etag: string | null }> {
   const res = await get(BLOB_KEY, { access: "private", useCache: false });
   if (!res || res.statusCode !== 200) return { content: fresh(), etag: null };
   const text = await new Response(res.stream).text();
-  return { content: withDefaults(JSON.parse(text) as Content), etag: res.blob.etag };
+  // get() reports a weak ETag (W/"…") because the body may be compressed;
+  // put({ ifMatch }) compares against the strong form of the same hash.
+  return { content: withDefaults(JSON.parse(text) as Content), etag: res.blob.etag.replace(/^W\//, "") };
 }
 
 async function blobWrite(content: Content, etag: string | null) {

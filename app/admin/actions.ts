@@ -26,6 +26,18 @@ function move<T extends Ordered>(list: T[], id: string, dir: number) {
 }
 const nextOrder = (list: Ordered[]) => list.reduce((m, x) => Math.max(m, x.order + 1), 0);
 
+/** Saves content; on failure removes files uploaded in this request and returns a message instead of crashing. */
+async function save(mutate: Parameters<typeof updateContent>[0], newFiles: (string | null)[] = []): Promise<ActionState> {
+  try {
+    await updateContent(mutate);
+    return null;
+  } catch (e) {
+    console.error("[admin] save failed", e);
+    await Promise.all(newFiles.map(deleteUpload));
+    return fail("Saqlab bo'lmadi. Sahifani yangilab, qayta urinib ko'ring.");
+  }
+}
+
 /* ---------- auth ---------- */
 export async function login(_prev: ActionState, fd: FormData): Promise<ActionState> {
   if (!isConfigured()) return fail("Server sozlanmagan: .env.local faylida ADMIN_PASSWORD va ADMIN_SECRET ni kiriting.");
@@ -73,7 +85,7 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
   const toDelete: (string | null)[] = [];
   let savedId = id;
 
-  await updateContent((c) => {
+  const err = await save((c) => {
     const existing = id ? c.projects.find((p) => p.id === id) : undefined;
     let slug = slugify(s(fd, "slug", 80) || name);
     const taken = (x: string) => c.projects.some((p) => p.slug === x && p.id !== existing?.id);
@@ -108,7 +120,8 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
       savedId = newId("p");
       c.projects.push({ id: savedId, ...base, cover, gallery, order: nextOrder(c.projects) });
     }
-  });
+  }, uploaded);
+  if (err) return err;
   await Promise.all(toDelete.map(deleteUpload));
   refresh();
   if (!id) redirect(`/admin/projects/${savedId}?created=1`);
@@ -150,14 +163,15 @@ export async function saveClient(_prev: ActionState, fd: FormData): Promise<Acti
   let logo: string | null;
   try { logo = await saveUpload(fd.get("logo")); } catch (e) { if (e instanceof UploadError) return fail(e.message); throw e; }
   let old: string | null = null;
-  await updateContent((c) => {
+  const err = await save((c) => {
     const ex = id ? c.clients.find((x) => x.id === id) : undefined;
     const url = safeUrl(s(fd, "url", 300));
     if (ex) {
       if (logo || fd.get("logo_remove") === "on") { old = ex.logo; ex.logo = logo; }
       Object.assign(ex, { name, url });
     } else c.clients.push({ id: newId("c"), name, url, logo, order: nextOrder(c.clients) });
-  });
+  }, [logo]);
+  if (err) return err;
   await deleteUpload(old);
   refresh();
   return done(id ? "Mijoz saqlandi" : "Mijoz qo'shildi");
@@ -177,11 +191,12 @@ export async function saveFaq(_prev: ActionState, fd: FormData): Promise<ActionS
   await requireAdmin();
   const id = s(fd, "id", 40), question = s(fd, "question", 300), answer = s(fd, "answer", 3000);
   if (!question || !answer) return fail("Savol va javobni to'ldiring.");
-  await updateContent((c) => {
+  const err = await save((c) => {
     const ex = id ? c.faq.find((x) => x.id === id) : undefined;
     if (ex) Object.assign(ex, { question, answer });
     else c.faq.push({ id: newId("f"), question, answer, order: nextOrder(c.faq) });
   });
+  if (err) return err;
   refresh();
   return done(id ? "Savol saqlandi" : "Savol qo'shildi");
 }
@@ -194,11 +209,12 @@ export async function saveTestimonial(_prev: ActionState, fd: FormData): Promise
   const id = s(fd, "id", 40), name = s(fd, "name", 120), text = s(fd, "text", 1200);
   if (!name || !text) return fail("Ism va fikr matnini kiriting.");
   const data = { name, text, role: s(fd, "role", 160), color: color(fd, "color", "#22d3ee") };
-  await updateContent((c) => {
+  const err = await save((c) => {
     const ex = id ? c.testimonials.find((x) => x.id === id) : undefined;
     if (ex) Object.assign(ex, data);
     else c.testimonials.push({ id: newId("t"), ...data, order: nextOrder(c.testimonials) });
   });
+  if (err) return err;
   refresh();
   return done(id ? "Fikr saqlandi" : "Fikr qo'shildi");
 }
@@ -214,13 +230,14 @@ export async function saveMember(_prev: ActionState, fd: FormData): Promise<Acti
   try { photo = await saveUpload(fd.get("photo")); } catch (e) { if (e instanceof UploadError) return fail(e.message); throw e; }
   const data = { name, role: s(fd, "role", 120), color: color(fd, "color", "#0e7490") };
   let old: string | null = null;
-  await updateContent((c) => {
+  const err = await save((c) => {
     const ex = id ? c.team.find((x) => x.id === id) : undefined;
     if (ex) {
       if (photo || fd.get("photo_remove") === "on") { old = ex.photo; ex.photo = photo; }
       Object.assign(ex, data);
     } else c.team.push({ id: newId("u"), ...data, photo, order: nextOrder(c.team) });
-  });
+  }, [photo]);
+  if (err) return err;
   await deleteUpload(old);
   refresh();
   return done(id ? "Saqlandi" : "Jamoa a'zosi qo'shildi");
@@ -264,7 +281,8 @@ export async function saveSettings(_prev: ActionState, fd: FormData): Promise<Ac
     telegram: s(fd, "telegram", 60).replace(/^@/, ""),
     address: s(fd, "address", 160),
   };
-  await updateContent((c) => { c.settings = settings; });
+  const err = await save((c) => { c.settings = settings; });
+  if (err) return err;
   refresh();
   return done("Sozlamalar saqlandi");
 }
