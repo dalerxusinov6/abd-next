@@ -491,7 +491,9 @@ html [data-reveal].in { opacity: 1; transform: none; }
 .field input:focus, .field textarea:focus { border-color: rgba(0,200,255,.5); background: rgba(0,200,255,.04); box-shadow: 0 0 0 4px rgba(0,200,255,.08); }
 .field input:focus + label, .field input:not(:placeholder-shown) + label,
 .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { transform: translateY(-10px) scale(.78); color: var(--cyan); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px 8px; }
+.chips > span { display: inline-flex; }
+.chips label { display: inline-block; line-height: 1.3; }
 .chips input { position: absolute; opacity: 0; pointer-events: none; }
 .chips label { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 14px; color: var(--muted); cursor: pointer; transition: color .3s, background-color .3s, border-color .3s; }
 .chips input:checked + label { background: rgba(0,200,255,.12); border-color: rgba(0,200,255,.5); color: var(--text); }
@@ -501,7 +503,11 @@ html [data-reveal].in { opacity: 1; transform: none; }
 .form-success .check { width: 80px; height: 80px; margin: 0 auto 24px; border-radius: 50%; background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.4); display: grid; place-items: center; color: #4ade80; animation: pop .7s var(--ease); }
 .form.sent > :not(.form-success) { display: none; }
 .form.sent .form-success { display: block; }
-.map-card { height: 320px; position: relative; overflow: hidden; margin-top: 24px; }
+.map-card { height: 320px; position: relative; overflow: hidden; margin-top: 16px; }
+@media (min-width: 1025px) {
+  .contact-side { display: flex; flex-direction: column; }
+  .contact-side .map-card { flex: 1; height: auto; min-height: 260px; }
+}
 .map-card svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .map-pin { position: absolute; left: 52%; top: 46%; transform: translate(-50%, -100%); }
 .map-pin i { position: absolute; left: 50%; bottom: -6px; width: 14px; height: 14px; border-radius: 50%; background: var(--cyan); transform: translateX(-50%); box-shadow: 0 0 0 0 rgba(0,200,255,.6); animation: pinPulse 2s infinite; }

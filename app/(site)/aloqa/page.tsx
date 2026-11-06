@@ -17,7 +17,7 @@ export default async function ContactPage() {
       <PageHero crumb="Aloqa" title="Keling,|*gaplashamiz*" lead="Loyihangiz haqida bir necha so'z yozing — 24 soat ichida bog'lanamiz va bepul baholab beramiz." />
       <section className="section" style={{ paddingTop: 20 }}>
         <div className="container contact-layout">
-          <div>
+          <div className="contact-side">
             <div className="contact-info" data-stagger="">
               <a href={`tel:${s.phone.replace(/\s/g, "")}`} className="card"><span className="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg></span><div><small>Telefon</small><b>{s.phone}</b></div></a>
               <a href={`mailto:${s.email}`} className="card"><span className="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="2" y="4" width="20" height="16" rx="3" /><path d="m22 7-10 6L2 7" /></svg></span><div><small>Email</small><b>{s.email}</b></div></a>
