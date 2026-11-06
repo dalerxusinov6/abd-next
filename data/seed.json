@@ -9,9 +9,9 @@
       "year": 2024,
       "client": "Maktab TOP",
       "duration": "2 oy",
-      "description": "Maktablar reytingi va ota-onalar uchun qidiruv platformasi.",
-      "task": "Ota-onalar farzandi uchun maktab tanlashda ishonchli ma'lumot topa olmasdi. Ma'lumotlar tarqoq va eskirgan edi.",
-      "solution": "Filtrlar, xarita va har bir maktab uchun alohida sahifali platforma yaratdik. Ma'lumotlar admin panel orqali yangilanadi.",
+      "description": "Maktablar reytingi va ota-onalar uçun qidiruv platformasi.",
+      "task": "Ota-onalar farzandi uçun maktab tanlaşda işonçli ma’lumot topa olmasdi. Ma’lumotlar tarqoq va eskirgan edi.",
+      "solution": "Filtrlar, xarita va har bir maktab uçun alohida sahifali platforma yaratdik. Ma’lumotlar admin panel orqali yangilanadi.",
       "services": [
         "Veb dizayn",
         "Next.js",
@@ -24,11 +24,11 @@
         },
         {
           "value": "80k",
-          "label": "Oylik tashrif"
+          "label": "Oylik taşrif"
         },
         {
           "value": "3.2 daq",
-          "label": "O'rtacha sessiya"
+          "label": "Ōrtaça sessiya"
         }
       ],
       "color": "#cbd5e1",
@@ -99,9 +99,9 @@
       "year": 2024,
       "client": "Highline",
       "duration": "6 hafta",
-      "description": "Fintech startapi uchun logotip, ranglar palitrasi, tipografika va brendbuk.",
-      "task": "Yangi fintech startapiga investorlar va mijozlar oldida jiddiy, lekin zamonaviy ko'rinadigan brend kerak edi.",
-      "solution": "Tezlik va o'sishni ifodalovchi belgi, cheklangan rang palitrasi va qat'iy tipografik tizim ishlab chiqdik. Brendbuk 60 sahifadan iborat.",
+      "description": "Fintech startapi uçun logotip, ranglar palitrasi, tipografika va brendbuk.",
+      "task": "Yangi fintech startapiga investorlar va mijozlar oldida jiddiy, lekin zamonaviy kōrinadigan brend kerak edi.",
+      "solution": "Tezlik va ōsişni ifodalovçi belgi, çeklangan rang palitrasi va qat’iy tipografik tizim işlab çiqdik. Brendbuk 60 sahifadan iborat.",
       "services": [
         "Logotip",
         "Brendbuk",
@@ -193,9 +193,9 @@
       "year": 2023,
       "client": "Roll Biscuit",
       "duration": "1 oy",
-      "description": "Pechenye mahsulotlari uchun yorqin qadoq seriyasi.",
-      "task": "Do'kon peshtaxtasida mahsulot raqobatchilar orasida ko'rinmay qolardi.",
-      "solution": "6 ta ta'm uchun yorqin, bir-biridan oson ajraladigan qadoq seriyasini yaratdik.",
+      "description": "Peçenye mahsulotlari uçun yorqin qadoq seriyasi.",
+      "task": "Dōkon peştaxtasida mahsulot raqobatçilar orasida kōrinmay qolardi.",
+      "solution": "6 ta ta’m uçun yorqin, bir-biridan oson ajraladigan qadoq seriyasini yaratdik.",
       "services": [
         "Qadoq",
         "Illyustratsiya",
@@ -204,15 +204,15 @@
       "results": [
         {
           "value": "6",
-          "label": "Ta'm seriyasi"
+          "label": "Ta’m seriyasi"
         },
         {
           "value": "+30%",
-          "label": "Sotuv o'sishi"
+          "label": "Sotuv ōsişi"
         },
         {
           "value": "12",
-          "label": "Do'kon tarmog'i"
+          "label": "Dōkon tarmoği"
         }
       ],
       "color": "#f7b2c9",
@@ -287,9 +287,9 @@
       "year": 2025,
       "client": "Cabin Rent",
       "duration": "3 hafta",
-      "description": "Tog'dagi dam olish uylari uchun bron qilish lendingi.",
-      "task": "Mijozlar Instagram orqali bron qilardi — bu ko'p vaqt olardi va buyurtmalar yo'qolardi.",
-      "solution": "Atmosferik vizual, onlayn kalendar va to'lov bilan bitta sahifali bron qilish saytini yaratdik.",
+      "description": "Toğdagi dam oliş uylari uçun bron qiliş lendingi.",
+      "task": "Mijozlar Instagram orqali bron qilardi — bu kōp vaqt olardi va buyurtmalar yōqolardi.",
+      "solution": "Atmosferik vizual, onlayn kalendar va tōlov bilan bitta sahifali bron qiliş saytini yaratdik.",
       "services": [
         "Lending",
         "Bron tizimi",
@@ -306,7 +306,7 @@
         },
         {
           "value": "0",
-          "label": "Yo'qolgan buyurtma"
+          "label": "Yōqolgan buyurtma"
         }
       ],
       "color": "#1b2537",
@@ -327,9 +327,9 @@
       "year": 2023,
       "client": "Redmar",
       "duration": "3 oy",
-      "description": "Savdo tarmog'i uchun brend yangilanishi va ichki CRM tizimi.",
-      "task": "Buyurtmalar, ombor va hisobotlar Excel fayllarda yuritilardi — xatolar ko'p edi.",
-      "solution": "Barcha jarayonlarni bitta panelga yig'adigan CRM va Telegram bot yaratdik. Brend ham yangilandi.",
+      "description": "Savdo tarmoği uçun brend yangilanişi va içki CRM tizimi.",
+      "task": "Buyurtmalar, ombor va hisobotlar Excel fayllarda yuritilardi — xatolar kōp edi.",
+      "solution": "Barça jarayonlarni bitta panelga yiğadigan CRM va Telegram bot yaratdik. Brend ham yangilandi.",
       "services": [
         "Brending",
         "CRM",
@@ -338,7 +338,7 @@
       "results": [
         {
           "value": "100%",
-          "label": "Qog'ozsiz"
+          "label": "Qoğozsiz"
         },
         {
           "value": "2x",
@@ -421,9 +421,9 @@
       "year": 2024,
       "client": "La Vida Residence",
       "duration": "5 hafta",
-      "description": "Turar-joy majmuasi uchun premium brend identifikatsiyasi.",
-      "task": "Premium turar-joy majmuasi bozorda boshqa qurilishlardan ajralib turishi kerak edi.",
-      "solution": "Nafis belgi, tinch ranglar va sotuv bo'limi uchun to'liq materiallar to'plamini ishlab chiqdik.",
+      "description": "Turar-joy majmuasi uçun premium brend identifikatsiyasi.",
+      "task": "Premium turar-joy majmuasi bozorda boşqa qurilişlardan ajralib turişi kerak edi.",
+      "solution": "Nafis belgi, tinç ranglar va sotuv bōlimi uçun tōliq materiallar tōplamini işlab çiqdik.",
       "services": [
         "Brend",
         "Bosma",
@@ -515,12 +515,12 @@
       "year": 2025,
       "client": "Logitech UZ",
       "duration": "3 oy",
-      "description": "Rasmiy distribyutor uchun internet-do'kon.",
-      "task": "Rasmiy distribyutorda onlayn sotuv kanali yo'q edi, mijozlar marketpleyslarga ketardi.",
-      "solution": "Katalog, savat, Payme/Click integratsiyasi va admin panelli internet-do'kon yaratdik.",
+      "description": "Rasmiy distribyutor uçun internet-dōkon.",
+      "task": "Rasmiy distribyutorda onlayn sotuv kanali yōq edi, mijozlar marketpleyslarga ketardi.",
+      "solution": "Katalog, savat, Payme/Click integratsiyasi va admin panelli internet-dōkon yaratdik.",
       "services": [
         "e-Commerce",
-        "To'lov integratsiyasi",
+        "Tōlov integratsiyasi",
         "Admin panel"
       ],
       "results": [
@@ -534,7 +534,7 @@
         },
         {
           "value": "1.2s",
-          "label": "Yuklanish vaqti"
+          "label": "Yuklaniş vaqti"
         }
       ],
       "color": "#7c5cf0",
@@ -653,8 +653,8 @@
   "faq": [
     {
       "id": "f1",
-      "question": "Ishlaringizning o'ziga xosligi nimada?",
-      "answer": "Har bir loyihani biznes maqsadlaridan boshlaymiz: tadqiqot, prototip, dizayn va dasturlash bitta jamoada bajariladi — shuning uchun natija tez va izchil.",
+      "question": "Işlaringizning ōziga xosligi nimada?",
+      "answer": "Har bir loyihani biznes maqsadlaridan boşlaymiz: tadqiqot, prototip, dizayn va dasturlaş bitta jamoada bajariladi — şuning uçun natija tez va izçil.",
       "order": 0,
       "tr": {
         "ru": {
@@ -670,7 +670,7 @@
     {
       "id": "f2",
       "question": "Pulni qaytarib berasizmi?",
-      "answer": "Ha. Agar birinchi bosqich natijasi sizni qoniqtirmasa, oldindan to'lovni to'liq qaytaramiz.",
+      "answer": "Ha. Agar birinçi bosqiç natijasi sizni qoniqtirmasa, oldindan tōlovni tōliq qaytaramiz.",
       "order": 1,
       "tr": {
         "ru": {
@@ -685,8 +685,8 @@
     },
     {
       "id": "f3",
-      "question": "Qanday to'lov turlarini qabul qilasiz?",
-      "answer": "Bank o'tkazmasi, Payme, Click, Uzcard/Humo kartalari va xalqaro mijozlar uchun Visa/Mastercard.",
+      "question": "Qanday tōlov turlarini qabul qilasiz?",
+      "answer": "Bank ōtkazmasi, Payme, Click, Uzcard/Humo kartalari va xalqaro mijozlar uçun Visa/Mastercard.",
       "order": 2,
       "tr": {
         "ru": {
@@ -701,7 +701,7 @@
     },
     {
       "id": "f4",
-      "question": "Loyiha qancha vaqt oladi?",
+      "question": "Loyiha qança vaqt oladi?",
       "answer": "Lending sahifa — 1–2 hafta, korporativ sayt — 3–6 hafta, mobil ilova yoki CRM — 2–4 oy.",
       "order": 3,
       "tr": {
@@ -721,7 +721,7 @@
       "id": "t1",
       "name": "Abdulloh Ergashev",
       "role": "Grafik dizayner · Mijoz",
-      "text": "ABD Group bilan ishlash juda qulay bo'ldi. Saytimiz muddatidan oldin tayyor bo'ldi va sotuvlar 40% oshdi.",
+      "text": "ABD Group bilan işlaş juda qulay bōldi. Saytimiz muddatidan oldin tayyor bōldi va sotuvlar 40% oşdi.",
       "color": "#00c8ff",
       "order": 0,
       "tr": {
@@ -738,8 +738,8 @@
     {
       "id": "t2",
       "name": "Madina Karimova",
-      "role": "Highline · Asoschi",
-      "text": "Brendimizni noldan yaratib berishdi. Har bir detalga e'tibor va professional yondashuv — tavsiya qilaman!",
+      "role": "Highline · Asosçi",
+      "text": "Brendimizni noldan yaratib berişdi. Har bir detalga e’tibor va professional yondaşuv — tavsiya qilaman!",
       "color": "#a78bfa",
       "order": 1
     },
@@ -747,7 +747,7 @@
       "id": "t3",
       "name": "Sardor Rahimov",
       "role": "Redmar · Direktor",
-      "text": "CRM tizimi tufayli omborxona va buyurtmalarni boshqarish ikki baravar tezlashdi. Rahmat, jamoa!",
+      "text": "CRM tizimi tufayli omborxona va buyurtmalarni boşqariş ikki baravar tezlaşdi. Rahmat, jamoa!",
       "color": "#fbbf24",
       "order": 2,
       "tr": {
@@ -765,7 +765,7 @@
       "id": "t5",
       "name": "Jasur Bekov",
       "role": "Bek & Sons · CEO",
-      "text": "Tez javob, aniq muddatlar va ajoyib natija. Keyingi loyihani ham albatta shu jamoa bilan qilamiz.",
+      "text": "Tez javob, aniq muddatlar va ajoyib natija. Keyingi loyihani ham albatta şu jamoa bilan qilamiz.",
       "color": "#f472b6",
       "order": 4,
       "tr": {
@@ -797,7 +797,7 @@
     "phone": "+998 50 020 56 44",
     "email": "hello@abdgroup.uz",
     "telegram": "@abdgroup",
-    "address": "Toshkent, O'zbekiston",
+    "address": "Toşkent, Ōzbekiston",
     "tr": {
       "ru": {
         "heroWords": [
