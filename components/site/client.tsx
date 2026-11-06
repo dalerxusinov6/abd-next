@@ -247,3 +247,30 @@ export function Newsletter() {
 declare global {
   interface Window { abdToast?: (msg: string) => void }
 }
+
+/* ---------- footer wordmark: the letter under the pointer/finger glows ---------- */
+export function FooterWord({ text }: { text: string }) {
+  const [on, setOn] = useState(-1);
+  const pick = (x: number, y: number) => {
+    const el = document.elementFromPoint(x, y) as HTMLElement | null;
+    const i = el?.dataset.i;
+    setOn(i === undefined ? -1 : Number(i));
+  };
+  return (
+    <div
+      className="footer-big"
+      aria-hidden="true"
+      onPointerMove={(e) => pick(e.clientX, e.clientY)}
+      onPointerDown={(e) => pick(e.clientX, e.clientY)}
+      onTouchMove={(e) => { const t = e.touches[0]; if (t) pick(t.clientX, t.clientY); }}
+      onPointerLeave={() => setOn(-1)}
+      onTouchEnd={() => setOn(-1)}
+    >
+      {[...text].map((ch, i) =>
+        ch === " " ? " " : (
+          <span key={i} data-i={i} className={i === on ? "on" : Math.abs(i - on) === 1 && on >= 0 ? "near" : undefined}>{ch}</span>
+        ),
+      )}
+    </div>
+  );
+}

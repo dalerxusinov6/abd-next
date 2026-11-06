@@ -520,7 +520,7 @@ html [data-reveal].in { opacity: 1; transform: none; }
 .newsletter p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
 .newsletter form { display: flex; gap: 6px; padding: 6px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--surface); }
 .newsletter input { flex: 1; min-width: 0; background: none; border: 0; outline: none; padding: 0 14px; font-size: 14px; }
-.footer-big { font-family: var(--font-display); font-weight: 800; font-size: clamp(56px, 16vw, 240px); letter-spacing: -.04em; line-height: .9; white-space: nowrap; text-align: center; margin: 80px 0 40px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.14); user-select: none; transition: color .6s, -webkit-text-stroke-color .6s; }
+.footer-big { font-family: var(--font-display); font-weight: 800; font-size: clamp(56px, 16vw, 240px); letter-spacing: -.04em; line-height: .9; white-space: nowrap; text-align: center; margin: 80px 0 40px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.14); user-select: none; touch-action: pan-y; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--dim); }
 .footer-bottom nav { display: flex; gap: 20px; }
 .socials { display: flex; gap: 8px; }
@@ -596,7 +596,9 @@ html [data-reveal].in { opacity: 1; transform: none; }
 @keyframes curtainLogo { from { transform: scale(.9); opacity: .5; } to { transform: scale(1); opacity: 1; } }
 @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(.86); } }
 @keyframes scan { from { left: 20%; } to { left: 80%; } }
-.footer-big:hover { color: rgba(255,255,255,.04); -webkit-text-stroke-color: var(--cyan); }
+.footer-big span { transition: color .7s var(--ease), -webkit-text-stroke-color .7s var(--ease), text-shadow .9s var(--ease); }
+.footer-big span.near { -webkit-text-stroke-color: rgba(0,200,255,.4); text-shadow: 0 0 40px rgba(0,200,255,.12); }
+.footer-big span.on { color: rgba(0,200,255,.1); -webkit-text-stroke-color: var(--cyan); text-shadow: 0 0 18px rgba(0,200,255,.6), 0 0 60px rgba(0,200,255,.35); transition-duration: .35s, .35s, .45s; }
 
 /* interactive dot field */
 .dot-field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }

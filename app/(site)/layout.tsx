@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { readContent, byOrder } from "@/lib/store";
-import { Header, Newsletter } from "@/components/site/client";
+import { FooterWord, Header, Newsletter } from "@/components/site/client";
 import SiteEffects from "@/components/site/SiteEffects";
 
 export const dynamic = "force-dynamic";
@@ -37,7 +37,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
             <div><h5>Yordam</h5><ul><li><Link href="/aloqa#faq">FAQ</Link></li><li><Link href="/aloqa">Aloqa</Link></li><li><Link href="/biz-haqimizda">Biz haqimizda</Link></li><li><a href={`tel:${settings.phone.replace(/\s/g, "")}`}>{settings.phone}</a></li></ul></div>
             <div className="newsletter"><h5>Yangiliklar</h5><p>Birinchi buyurtmangizga 30% chegirma olish uchun email qoldiring.</p><Newsletter /></div>
           </div>
-          <div className="footer-big" aria-hidden="true">abd group</div>
+          <FooterWord text="abd group" />
           <div className="footer-bottom">
             <span>© 2023–{new Date().getFullYear()} ABD Group. Barcha huquqlar himoyalangan.</span>
             <nav><a href="#">Foydalanish shartlari</a><a href="#">Maxfiylik siyosati</a></nav>
