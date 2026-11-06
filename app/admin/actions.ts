@@ -8,9 +8,12 @@ import { newId, slugify, updateContent } from "@/lib/store";
 import { deleteUpload, saveUpload, UploadError } from "@/lib/uploads";
 import { CATEGORIES, VISUALS, type ActionState, type Category, type Content, type Result, type Visual } from "@/lib/types";
 import { EXTRA_LANGS, type Tr } from "@/lib/i18n";
+import { toNewLatin } from "@/lib/uzLatin";
 
 /* ---------- helpers ---------- */
 const s = (fd: FormData, k: string, max = 500) => String(fd.get(k) ?? "").trim().slice(0, max);
+/** Uzbek text field: stored in the new Latin alphabet whichever way it was typed. Not for names. */
+const uz = (fd: FormData, k: string, max = 500) => toNewLatin(s(fd, k, max));
 const int = (fd: FormData, k: string, fallback = 0) => { const n = parseInt(s(fd, k, 12), 10); return Number.isFinite(n) ? n : fallback; };
 const color = (fd: FormData, k: string, fallback: string) => { const v = s(fd, k, 9); return /^#[0-9a-f]{6}$/i.test(v) ? v : fallback; };
 const safeUrl = (v: string) => (/^https?:\/\/[^\s]+$/i.test(v) ? v : "");
@@ -99,7 +102,7 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
   }
 
   const results = [0, 1, 2]
-    .map((i) => ({ value: s(fd, `r${i}_value`, 30), label: s(fd, `r${i}_label`, 80) }))
+    .map((i) => ({ value: uz(fd, `r${i}_value`, 30), label: uz(fd, `r${i}_label`, 80) }))
     .filter((r) => r.value || r.label);
   const tr = readTr<Record<string, unknown>>(fd, {
     name: { max: 120 }, type: { max: 60 }, duration: { max: 40 }, description: { max: 600 },
@@ -125,15 +128,15 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
 
     const base = {
       slug, name,
-      type: s(fd, "type", 60) || "Loyiha",
+      type: uz(fd, "type", 60) || "Loyiha",
       category: (CATEGORIES as readonly string[]).includes(category) ? category : "web",
       year: int(fd, "year", new Date().getFullYear()),
-      duration: s(fd, "duration", 40),
+      duration: uz(fd, "duration", 40),
       url: safeUrl(s(fd, "url", 300)),
-      description: s(fd, "description", 600),
-      task: s(fd, "task", 3000),
-      solution: s(fd, "solution", 3000),
-      services: s(fd, "services", 600).split(",").map((x) => x.trim()).filter(Boolean).slice(0, 12),
+      description: uz(fd, "description", 600),
+      task: uz(fd, "task", 3000),
+      solution: uz(fd, "solution", 3000),
+      services: uz(fd, "services", 600).split(",").map((x) => x.trim()).filter(Boolean).slice(0, 12),
       results,
       color: color(fd, "color", "#1d3b8b"),
       accent: color(fd, "accent", "#00c8ff"),
@@ -222,7 +225,7 @@ export async function moveClient(fd: FormData) { await requireAdmin(); await upd
 /* ---------- FAQ ---------- */
 export async function saveFaq(_prev: ActionState, fd: FormData): Promise<ActionState> {
   await requireAdmin();
-  const id = s(fd, "id", 40), question = s(fd, "question", 300), answer = s(fd, "answer", 3000);
+  const id = s(fd, "id", 40), question = uz(fd, "question", 300), answer = uz(fd, "answer", 3000);
   if (!question || !answer) return fail("Savol va javobni to'ldiring.");
   const err = await save((c) => {
     const ex = id ? c.faq.find((x) => x.id === id) : undefined;
@@ -240,9 +243,9 @@ export async function moveFaq(fd: FormData) { await requireAdmin(); await update
 /* ---------- testimonials ---------- */
 export async function saveTestimonial(_prev: ActionState, fd: FormData): Promise<ActionState> {
   await requireAdmin();
-  const id = s(fd, "id", 40), name = s(fd, "name", 120), text = s(fd, "text", 1200);
+  const id = s(fd, "id", 40), name = s(fd, "name", 120), text = uz(fd, "text", 1200);
   if (!name || !text) return fail("Ism va fikr matnini kiriting.");
-  const data = { name, text, role: s(fd, "role", 160), color: color(fd, "color", "#00c8ff"), tr: readTr<{ role: string; text: string }>(fd, { role: { max: 160 }, text: { max: 1200 } }) };
+  const data = { name, text, role: uz(fd, "role", 160), color: color(fd, "color", "#00c8ff"), tr: readTr<{ role: string; text: string }>(fd, { role: { max: 160 }, text: { max: 1200 } }) };
   const err = await save((c) => {
     const ex = id ? c.testimonials.find((x) => x.id === id) : undefined;
     if (ex) Object.assign(ex, data);
@@ -262,7 +265,7 @@ export async function saveMember(_prev: ActionState, fd: FormData): Promise<Acti
   if (!name) return fail("Ismni kiriting.");
   let photo: string | null;
   try { photo = await saveUpload(fd.get("photo")); } catch (e) { if (e instanceof UploadError) return fail(e.message); throw e; }
-  const data = { name, role: s(fd, "role", 120), color: color(fd, "color", "#0e7490"), tr: readTr<{ role: string }>(fd, { role: { max: 120 } }) };
+  const data = { name, role: uz(fd, "role", 120), color: color(fd, "color", "#0e7490"), tr: readTr<{ role: string }>(fd, { role: { max: 120 } }) };
   let old: string | null = null;
   const err = await save((c) => {
     const ex = id ? c.team.find((x) => x.id === id) : undefined;
@@ -305,7 +308,7 @@ export async function deleteSubscriber(fd: FormData) {
 /* ---------- settings ---------- */
 export async function saveSettings(_prev: ActionState, fd: FormData): Promise<ActionState> {
   await requireAdmin();
-  const words = s(fd, "heroWords", 1000).split("\n").map((w) => w.trim()).filter(Boolean).slice(0, 10);
+  const words = uz(fd, "heroWords", 1000).split("\n").map((w) => w.trim()).filter(Boolean).slice(0, 10);
   if (!words.length) return fail("Kamida bitta hero so'zini kiriting.");
   const settings: Content["settings"] = {
     heroWords: words,
@@ -313,7 +316,7 @@ export async function saveSettings(_prev: ActionState, fd: FormData): Promise<Ac
     phone: s(fd, "phone", 40),
     email: s(fd, "email", 160),
     telegram: s(fd, "telegram", 60).replace(/^@/, ""),
-    address: s(fd, "address", 160),
+    address: uz(fd, "address", 160),
     tr: readTr<{ heroWords: string[]; address: string }>(fd, { heroWords: { max: 1000, kind: "lines" }, address: { max: 160 } }),
   };
   const err = await save((c) => { c.settings = settings; });
