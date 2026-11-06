@@ -592,7 +592,7 @@ html [data-reveal].in { opacity: 1; transform: none; }
    ========================================================= */
 .logo img { height: 30px; width: auto; }
 .footer-about .logo img { height: 40px; }
-.curtain-logo img { width: 120px; animation: curtainLogo 1.2s var(--ease) infinite alternate; }
+.curtain-logo img { width: clamp(180px, 22vw, 260px); animation: curtainLogo 1.2s var(--ease) infinite alternate; }
 @keyframes curtainLogo { from { transform: scale(.9); opacity: .5; } to { transform: scale(1); opacity: 1; } }
 @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(.86); } }
 @keyframes scan { from { left: 20%; } to { left: 80%; } }
