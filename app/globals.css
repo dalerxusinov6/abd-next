@@ -815,3 +815,37 @@ html .p-cover[data-reveal] { transition: clip-path 1.4s var(--ease-in-out), opac
 @keyframes tiFlow { to { stroke-dashoffset: -16; } }
 @media (prefers-reduced-motion: reduce) { .team-icon * { animation: none !important; } }
 
+
+/* ---------- 404 ---------- */
+.nf { position: relative; overflow: hidden; min-height: 100svh; display: grid; align-items: center; padding: 140px 0 80px; text-align: center; }
+.nf-inner { position: relative; display: grid; justify-items: center; }
+.nf-stage {
+  --px: 0; --py: 0;
+  display: flex; align-items: center; justify-content: center; gap: .04em;
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(130px, 26vw, 360px); line-height: .8; letter-spacing: -.04em;
+  margin-bottom: clamp(28px, 4vw, 48px); user-select: none;
+}
+.nf-digit {
+  color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.22);
+  transform: translate(calc(var(--px) * 10px), calc(var(--py) * 8px));
+  transition: -webkit-text-stroke-color 1.2s var(--ease), color 1.2s var(--ease);
+}
+.nf-digit:hover { -webkit-text-stroke-color: var(--cyan); color: rgba(0,200,255,.06); transition-duration: .5s; }
+/* the "0": an outlined eye */
+.nf-eye {
+  position: relative; width: .6em; height: .74em; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.22); overflow: hidden;
+  display: grid; place-items: center; background: rgba(255,255,255,.015);
+}
+.nf-pupil { width: .24em; height: .24em; border-radius: 50%; background: var(--cyan); display: grid; place-items: center; will-change: transform; }
+.nf-pupil i { width: 32%; height: 32%; border-radius: 50%; background: var(--bg); transform: translate(-30%, -30%); }
+.nf-lid { position: absolute; inset: 0; z-index: 1; background: var(--bg); transform: scaleY(0); transform-origin: top; transition: transform .09s ease-in; }
+.nf-eye.blink .nf-lid { transform: scaleY(1); }
+.nf-title { margin-top: 18px; }
+.nf .lead { margin: 20px auto 0; }
+.nf .hero-cta { margin-top: 36px; }
+.nf-links { margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 18px; font-size: 14px; }
+.nf-links small { color: var(--dim); font-size: 13px; width: 100%; }
+.nf-links a { color: var(--muted); border-bottom: 1px solid var(--line-2); padding-bottom: 2px; transition: color .3s, border-color .3s; }
+.nf-links a:hover { color: var(--text); border-color: var(--cyan); }
+@media (prefers-reduced-motion: reduce) { .nf-digit { transform: none; } }

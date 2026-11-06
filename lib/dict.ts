@@ -108,6 +108,11 @@ const uz = {
     budget: "Taxminiy byudjet", budgets: ["$1k gaça", "$1k – $5k", "$5k – $15k", "$15k+"],
     message: "Loyiha haqida qisqaça", send: "Yuboriş", sending: "Yuborilmoqda…", thanks: "Rahmat!",
   },
+  notFound: {
+    eyebrow: "Xato 404", title: "Sahifa|*topilmadi*",
+    lead: "Biz hamma joyni qidirdik — bu manzilda heç narsa yöq. Ehtimol, sahifa köçirilgan yoki havola xato yozilgan.",
+    home: "Boş sahifaga", works: "Işlarimiz", popular: "Balki şu kerakdir:",
+  },
   msg: {
     received: "Sörovingiz qabul qilindi. Menejerimiz tez orada boğlanadi.",
     tooMany: "Juda köp uriniş. Birozdan keyin qayta yuboring.",
@@ -223,6 +228,11 @@ const ru: Dict = {
     budget: "Примерный бюджет", budgets: ["до $1k", "$1k – $5k", "$5k – $15k", "$15k+"],
     message: "Коротко о проекте", send: "Отправить", sending: "Отправляем…", thanks: "Спасибо!",
   },
+  notFound: {
+    eyebrow: "Ошибка 404", title: "Страница|*не найдена*",
+    lead: "Мы обыскали всё — по этому адресу ничего нет. Возможно, страницу перенесли или в ссылке опечатка.",
+    home: "На главную", works: "Наши работы", popular: "Возможно, вы искали:",
+  },
   msg: {
     received: "Заявка принята. Наш менеджер скоро свяжется с вами.",
     tooMany: "Слишком много попыток. Попробуйте чуть позже.",
@@ -335,6 +345,11 @@ const en: Dict = {
     name: "Your name", phone: "Phone number", email: "Email (optional)",
     budget: "Estimated budget", budgets: ["Under $1k", "$1k – $5k", "$5k – $15k", "$15k+"],
     message: "A few words about the project", send: "Send", sending: "Sending…", thanks: "Thank you!",
+  },
+  notFound: {
+    eyebrow: "Error 404", title: "Page|*not found*",
+    lead: "We looked everywhere — there's nothing at this address. The page may have moved, or the link has a typo.",
+    home: "Back home", works: "Our work", popular: "Maybe you were looking for:",
   },
   msg: {
     received: "Your request has been received. Our manager will contact you soon.",
