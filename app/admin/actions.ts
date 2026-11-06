@@ -96,7 +96,6 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
       type: s(fd, "type", 60) || "Loyiha",
       category: (CATEGORIES as readonly string[]).includes(category) ? category : "web",
       year: int(fd, "year", new Date().getFullYear()),
-      client: s(fd, "client", 120),
       duration: s(fd, "duration", 40),
       url: safeUrl(s(fd, "url", 300)),
       description: s(fd, "description", 600),

@@ -658,7 +658,7 @@ a.work { color: inherit; }
 .p-hero .back svg { width: 18px; }
 .p-hero h1 { margin: 26px 0 18px; font-size: clamp(48px, 9vw, 140px); }
 .p-visit { margin-top: 32px; }
-.p-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; }
+.p-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; }
 .p-meta small { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; color: var(--dim); margin-bottom: 6px; }
 .p-meta b { font-weight: 600; font-size: 17px; }
 .p-cover { position: relative; height: clamp(320px, 62vw, 720px); border-radius: 32px; overflow: hidden; border: 1px solid var(--line); isolation: isolate; clip-path: inset(8% 8% 8% 8% round 32px); transition: clip-path 1.4s var(--ease-in-out); }

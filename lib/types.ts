@@ -20,7 +20,8 @@ export type Project = {
   type: string;
   category: Category;
   year: number;
-  client: string;
+  /** No longer shown or edited; kept so older saved data still type-checks. */
+  client?: string;
   duration: string;
   /** Live site / store link; shows a "Saytga o'tish" button. */
   url?: string;

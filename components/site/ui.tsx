@@ -105,7 +105,7 @@ export function WorkCard({ p, size, delay }: { p: Project; size: string; delay?:
       <WorkArt p={p} />
       <div className="work-tags"><span className="tag">{p.type}</span><span className="tag">{p.year}</span></div>
       <div className="work-meta">
-        <div><h3>{p.name}</h3><span>{p.client}</span></div>
+        <div><h3>{p.name}</h3></div>
         <span className="work-go"><Arrow className="" /></span>
       </div>
     </Link>

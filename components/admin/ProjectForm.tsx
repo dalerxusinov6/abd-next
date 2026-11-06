@@ -29,10 +29,7 @@ export default function ProjectForm({ p }: { p?: Project }) {
             <F label="Muddat"><input name="duration" defaultValue={p?.duration} placeholder="3 oy" maxLength={40} /></F>
           </div>
           <F label="Sayt havolasi" hint="Loyiha sahifasida «Saytga o'tish» tugmasi chiqadi. Bo'sh qoldirsangiz, tugma ko'rinmaydi."><input name="url" type="url" defaultValue={p?.url} maxLength={300} placeholder="https://example.uz" /></F>
-          <div className="a-grid">
-            <F label="Mijoz"><input name="client" defaultValue={p?.client} maxLength={120} /></F>
-            <F label="Xizmatlar" hint="Vergul bilan ajrating"><input name="services" defaultValue={p?.services.join(", ")} placeholder="UI dizayn, Flutter" /></F>
-          </div>
+          <F label="Xizmatlar" hint="Vergul bilan ajrating"><input name="services" defaultValue={p?.services.join(", ")} placeholder="UI dizayn, Flutter" /></F>
           <F label="Qisqa tavsif" hint="Kartada va loyiha sahifasi boshida chiqadi"><textarea name="description" defaultValue={p?.description} maxLength={600} style={{ minHeight: 70 }} /></F>
         </div>
       </div>

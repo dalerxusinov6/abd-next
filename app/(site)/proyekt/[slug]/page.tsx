@@ -39,7 +39,6 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           )}
           <div className="p-meta" data-stagger="">
-            <div><small>Mijoz</small><b>{p.client}</b></div>
             <div><small>Yo&apos;nalish</small><b>{p.type}</b></div>
             <div><small>Yil</small><b>{p.year}</b></div>
             <div><small>Muddat</small><b>{p.duration}</b></div>
