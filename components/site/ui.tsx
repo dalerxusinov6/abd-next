@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Project } from "@/lib/types";
@@ -84,11 +85,16 @@ export function WorkVisual({ p }: { p: Project }) {
   return <div className="work-logo">{p.logoText || p.name}</div>;
 }
 
-export function WorkArt({ p, image, dim }: { p: Project; image?: string | null; dim?: boolean }) {
+/** Cards take about half the page on desktop, the full width on phones. */
+const CARD_SIZES = "(max-width: 680px) 100vw, (max-width: 1024px) 60vw, 50vw";
+
+export function WorkArt({ p, image, dim, sizes = CARD_SIZES, priority }: { p: Project; image?: string | null; dim?: boolean; sizes?: string; priority?: boolean }) {
   const src = image === undefined ? p.cover : image;
   return (
     <div className="work-art" style={{ background: p.color, filter: dim ? "brightness(.82)" : undefined }}>
-      {src ? <img className="cover-img" src={src} alt="" loading="lazy" /> : <WorkVisual p={p} />}
+      {src
+        ? <Image className="cover-img" src={src} alt="" fill sizes={sizes} priority={priority} unoptimized={src.endsWith(".svg")} />
+        : <WorkVisual p={p} />}
     </div>
   );
 }

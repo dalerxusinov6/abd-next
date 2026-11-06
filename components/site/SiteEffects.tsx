@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { canvasLoop } from "@/lib/perf";
 
 /*
  * All DOM-level motion of the public site: page curtain, header hide,
@@ -74,9 +75,13 @@ export default function SiteEffects() {
     const cleanups: (() => void)[] = [];
     if (ringEl && fine && !reduced) {
       let rx = innerWidth / 2, ry = innerHeight / 2, tx = rx, ty = ry;
-      const loop = () => { rx += (tx - rx) * 0.18; ry += (ty - ry) * 0.18; ringEl.style.transform = `translate(${rx}px, ${ry}px)`; raf = requestAnimationFrame(loop); };
-      loop();
-      const move = (e: PointerEvent) => { tx = e.clientX; ty = e.clientY; ringEl.classList.remove("hidden"); };
+      // runs only while the ring is still catching up with the pointer
+      const loop = () => {
+        rx += (tx - rx) * 0.18; ry += (ty - ry) * 0.18;
+        ringEl.style.transform = `translate(${rx}px, ${ry}px)`;
+        raf = Math.abs(tx - rx) + Math.abs(ty - ry) > 0.3 ? requestAnimationFrame(loop) : 0;
+      };
+      const move = (e: PointerEvent) => { tx = e.clientX; ty = e.clientY; ringEl.classList.remove("hidden"); if (!raf) raf = requestAnimationFrame(loop); };
       const over = (e: PointerEvent) => {
         const t = e.target as HTMLElement;
         const view = !!t.closest("[data-cursor=view]");
@@ -135,13 +140,14 @@ export default function SiteEffects() {
     });
     off.push(() => io.disconnect());
 
-    // dot fields
+    // dot fields: idle dots are batched by brightness (one fill per level instead
+    // of one per dot); only the few dots near the pointer are drawn one by one
     $$<HTMLCanvasElement>(".dot-field").forEach((cv) => {
       const ctx = cv.getContext("2d");
       const host = cv.parentElement;
       if (!ctx || !host) return;
-      const GAP = 30;
-      let w = 0, h = 0, mx = -999, my = -999, visible = true, t = 0, raf = 0;
+      const GAP = 30, R = 150, LEVELS = 8;
+      let w = 0, h = 0, mx = -999, my = -999, t = 0;
       let pts: { x: number; y: number; ox: number; oy: number }[] = [];
       const size = () => {
         const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -150,43 +156,59 @@ export default function SiteEffects() {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         pts = [];
         for (let y = GAP / 2; y < h; y += GAP) for (let x = GAP / 2; x < w; x += GAP) pts.push({ x, y, ox: x, oy: y });
+        loop.kick();
       };
-      size();
-      on("resize", size);
       const pm = (e: PointerEvent) => { const r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; };
       const pl = () => { mx = my = -999; };
-      host.addEventListener("pointermove", pm);
-      host.addEventListener("pointerleave", pl);
-      const vis = new IntersectionObserver(([en]) => (visible = en.isIntersecting));
-      vis.observe(host);
-      const draw = () => {
-        raf = requestAnimationFrame(draw);
-        if (!visible) return;
-        t += reduced ? 0 : 0.012;
+      const levels: Path2D[] = [];
+      const loop = canvasLoop(host, (steps) => {
+        t += reduced ? 0 : 0.012 * steps;
+        const k = 1 - Math.pow(0.88, steps); // same easing per second at any frame rate
         ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < LEVELS; i++) levels[i] = new Path2D();
         for (const p of pts) {
-          const wave = Math.sin(p.ox * 0.012 + p.oy * 0.008 + t * 2) * 0.5 + 0.5;
-          const dx = p.ox - mx, dy = p.oy - my, d = Math.hypot(dx, dy), R = 150;
+          const dx = p.ox - mx, dy = p.oy - my, d = Math.hypot(dx, dy);
           let gx = p.ox, gy = p.oy, near = 0;
           if (d < R) { near = 1 - d / R; const f = near * 26; gx += (dx / (d || 1)) * f; gy += (dy / (d || 1)) * f; }
-          p.x += (gx - p.x) * 0.12; p.y += (gy - p.y) * 0.12;
-          const a = 0.08 + wave * 0.12 + near * 0.7;
-          ctx.fillStyle = near > 0.05 ? `rgba(0,200,255,${a})` : `rgba(255,255,255,${a})`;
-          ctx.beginPath(); ctx.arc(p.x, p.y, 1.1 + near * 1.6, 0, 6.283); ctx.fill();
+          p.x += (gx - p.x) * k; p.y += (gy - p.y) * k;
+          const wave = Math.sin(p.ox * 0.012 + p.oy * 0.008 + t * 2) * 0.5 + 0.5;
+          if (near > 0.05) {
+            ctx.fillStyle = `rgba(0,200,255,${0.08 + wave * 0.12 + near * 0.7})`;
+            ctx.beginPath(); ctx.arc(p.x, p.y, 1.1 + near * 1.6, 0, 6.283); ctx.fill();
+          } else {
+            const path = levels[Math.min(LEVELS - 1, Math.floor(wave * LEVELS))];
+            path.moveTo(p.x + 1.1, p.y); path.arc(p.x, p.y, 1.1 + near * 1.6, 0, 6.283);
+          }
         }
-      };
-      draw();
-      off.push(() => { cancelAnimationFrame(raf); vis.disconnect(); host.removeEventListener("pointermove", pm); host.removeEventListener("pointerleave", pl); });
+        for (let i = 0; i < LEVELS; i++) {
+          ctx.fillStyle = `rgba(255,255,255,${0.08 + ((i + 0.5) / LEVELS) * 0.12})`;
+          ctx.fill(levels[i]);
+        }
+      });
+      size();
+      on("resize", size);
+      host.addEventListener("pointermove", pm);
+      host.addEventListener("pointerleave", pl);
+      off.push(() => { loop.stop(); host.removeEventListener("pointermove", pm); host.removeEventListener("pointerleave", pl); });
     });
 
     // parallax inside project images
     if (!reduced) {
-      const par = () => $$(".work .work-art, .p-gallery .work-art, .p-cover .work-art").forEach((a) => {
-        const r = a.parentElement!.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > innerHeight) return;
-        a.style.setProperty("--py", (-((r.top + r.height / 2 - innerHeight / 2) / innerHeight) * 40).toFixed(1) + "px");
-      });
-      on("scroll", par, { passive: true });
+      // measured once per frame at most (scroll events fire far more often on phones)
+      const arts = $$(".work .work-art, .p-gallery .work-art, .p-cover .work-art");
+      let pending = 0;
+      const par = () => {
+        pending = 0;
+        const vh = innerHeight;
+        const rects = arts.map((el) => el.parentElement!.getBoundingClientRect()); // read all, then write all
+        arts.forEach((el, i) => {
+          const r = rects[i];
+          if (r.bottom < 0 || r.top > vh) return;
+          el.style.setProperty("--py", (-((r.top + r.height / 2 - vh / 2) / vh) * 40).toFixed(1) + "px");
+        });
+      };
+      on("scroll", () => { if (!pending) pending = requestAnimationFrame(par); }, { passive: true });
+      off.push(() => cancelAnimationFrame(pending));
       par();
     }
 

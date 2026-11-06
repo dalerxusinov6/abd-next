@@ -53,7 +53,7 @@ export default async function ProjectPage({ params }: Props) {
       </section>
 
       <section className="container">
-        <div className="p-cover" data-reveal="fade"><WorkArt p={p} /></div>
+        <div className="p-cover" data-reveal="fade"><WorkArt p={p} sizes="100vw" priority /></div>
       </section>
 
       <section className="section" style={{ paddingBottom: 40 }}>
@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: Props) {
         <div className="container">
           <div className="p-gallery">
             {shots
-              ? shots.map((src, i) => <div className="shot" key={src} data-reveal="scale" data-delay={String((i % 2) * 0.1)}><WorkArt p={p} image={src} /></div>)
+              ? shots.map((src, i) => <div className="shot" key={src} data-reveal="scale" data-delay={String((i % 2) * 0.1)}><WorkArt p={p} image={src} sizes={i === 0 ? "100vw" : "(max-width: 680px) 100vw, 50vw"} /></div>)
               : (
                 <>
                   <div className="shot" data-reveal="scale"><WorkArt p={p} image={null} /></div>

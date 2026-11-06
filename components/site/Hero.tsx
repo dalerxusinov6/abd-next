@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { canvasLoop } from "@/lib/perf";
 
 /* Rotating word in the headline. Calls onChange so the logo can pulse. */
 export function Rotator({ words }: { words: string[] }) {
@@ -47,7 +48,7 @@ export function LogoParticles() {
     if (!canvas || !host || !ctx) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     type P = { tx: number; ty: number; x: number; y: number; vx: number; vy: number; c: string; s: number; ph: number; ease: number };
-    let W = 0, H = 0, parts: P[] = [], visible = true, t = 0, raf = 0;
+    let W = 0, H = 0, parts: P[] = [], visible = true, t = 0;
     const mouse = { x: -9999, y: -9999 };
     const img = new Image();
 
@@ -113,26 +114,33 @@ export function LogoParticles() {
     vis.observe(host);
 
     const R = 90;
-    const frame = () => {
-      raf = requestAnimationFrame(frame);
-      if (!visible || !parts.length) return;
+    // physics in fixed 60 fps steps (so a 30 fps device moves at the same speed),
+    // drawing once per frame and switching fillStyle only when the colour changes
+    const step = () => {
       t += 0.016;
-      ctx.clearRect(0, 0, W, H);
       for (const p of parts) {
         p.vx += (p.tx + Math.sin(t * 1.4 + p.ph) * 0.8 - p.x) * p.ease;
         p.vy += (p.ty + Math.cos(t * 1.2 + p.ph) * 0.8 - p.y) * p.ease;
         const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
-        let hot = false;
-        if (d2 < R * R) { const d = Math.sqrt(d2) || 1, f = (1 - d / R) * 6; p.vx += (dx / d) * f; p.vy += (dy / d) * f; hot = true; }
+        if (d2 < R * R) { const d = Math.sqrt(d2) || 1, f = (1 - d / R) * 6; p.vx += (dx / d) * f; p.vy += (dy / d) * f; }
         p.vx *= 0.86; p.vy *= 0.86; p.x += p.vx; p.y += p.vy;
-        ctx.fillStyle = hot || Math.abs(p.vx) + Math.abs(p.vy) > 3 ? "#00c8ff" : p.c;
-        ctx.fillRect(p.x, p.y, p.s, p.s);
       }
     };
-    frame();
+    const loop = canvasLoop(host, (steps) => {
+      if (!parts.length) return;
+      for (let n = Math.max(1, Math.round(steps)); n > 0; n--) step();
+      ctx.clearRect(0, 0, W, H);
+      let fill = "";
+      for (const p of parts) {
+        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const c = dx * dx + dy * dy < R * R || Math.abs(p.vx) + Math.abs(p.vy) > 3 ? "#00c8ff" : p.c;
+        if (c !== fill) { ctx.fillStyle = c; fill = c; }
+        ctx.fillRect(p.x, p.y, p.s, p.s);
+      }
+    });
 
     return () => {
-      cancelAnimationFrame(raf); vis.disconnect(); clearTimeout(rt);
+      loop.stop(); vis.disconnect(); clearTimeout(rt);
       removeEventListener("resize", onResize); removeEventListener("abd:pulse", pulse);
       canvas.removeEventListener("pointermove", pos); canvas.removeEventListener("pointerleave", leave); canvas.removeEventListener("pointerdown", burst);
     };

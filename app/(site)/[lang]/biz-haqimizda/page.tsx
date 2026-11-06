@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { byOrder, readContent } from "@/lib/store";
 import { CtaBox, Eyebrow, PageHero, Split, initials } from "@/components/site/ui";
 import { Count } from "@/components/site/client";
@@ -62,7 +63,7 @@ export default async function AboutPage({ params }: Props) {
             {team.map((m) => (
               <div className="card member" key={m.id}>
                 <div className="member-photo" style={{ background: m.color }}>
-                  {m.photo ? <img src={m.photo} alt={m.name} loading="lazy" /> : <b>{initials(m.name)}</b>}
+                  {m.photo ? <Image src={m.photo} alt={m.name} fill sizes="(max-width: 680px) 50vw, 25vw" unoptimized={m.photo.endsWith(".svg")} /> : <b>{initials(m.name)}</b>}
                 </div>
                 <div className="member-info"><h4>{m.name}</h4><span>{m.role}</span></div>
               </div>
