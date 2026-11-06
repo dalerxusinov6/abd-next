@@ -596,9 +596,9 @@ html [data-reveal].in { opacity: 1; transform: none; }
 @keyframes curtainLogo { from { transform: scale(.9); opacity: .5; } to { transform: scale(1); opacity: 1; } }
 @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(.86); } }
 @keyframes scan { from { left: 20%; } to { left: 80%; } }
-.footer-big span { transition: color .7s var(--ease), -webkit-text-stroke-color .7s var(--ease), text-shadow .9s var(--ease); }
-.footer-big span.near { -webkit-text-stroke-color: rgba(0,200,255,.4); text-shadow: 0 0 40px rgba(0,200,255,.12); }
-.footer-big span.on { color: rgba(0,200,255,.1); -webkit-text-stroke-color: var(--cyan); text-shadow: 0 0 18px rgba(0,200,255,.6), 0 0 60px rgba(0,200,255,.35); transition-duration: .35s, .35s, .45s; }
+.footer-big span { transition: color 1.6s var(--ease), -webkit-text-stroke-color 1.6s var(--ease); }
+.footer-big span.near { -webkit-text-stroke-color: rgba(0,200,255,.35); }
+.footer-big span.on { color: rgba(0,200,255,.08); -webkit-text-stroke-color: var(--cyan); transition-duration: .7s, .7s; }
 
 /* interactive dot field */
 .dot-field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
