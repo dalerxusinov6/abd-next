@@ -24,6 +24,8 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
     // previews and local dev must never end up in search results
     robots: indexable() ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } } : { index: false, follow: false },
     formatDetection: { telephone: false, email: false, address: false },
+    // Google Search Console / Yandex Webmaster ownership (Yandex also uses public/yandex_*.html)
+    verification: { google: "UMj0e_lFb0kEXB9iw4RjgXLF0s3Ff0i8pNYpJscgbIs" },
   };
 }
 
