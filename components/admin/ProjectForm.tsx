@@ -18,7 +18,7 @@ export default function ProjectForm({ p }: { p?: Project }) {
         <div className="a-form">
           <div className="a-grid">
             <F label="Loyiha nomi *"><input name="name" required defaultValue={p?.name} maxLength={120} /></F>
-            <F label="URL (slug)" hint="Bo'sh qoldirsangiz, nomdan avtomatik yasaladi"><input name="slug" defaultValue={p?.slug} maxLength={80} placeholder="masalan: gazna-bank" /></F>
+            <F label="URL (slug)" hint="Bo'sh qoldirsangiz, nomdan avtomatik yasaladi"><input name="slug" defaultValue={p?.slug} maxLength={80} placeholder="masalan: maktab-top" /></F>
           </div>
           <div className="a-grid four">
             <F label="Turi"><input name="type" defaultValue={p?.type} placeholder="Mobil ilova" maxLength={60} /></F>

@@ -13,7 +13,7 @@ const VALUES = [
 const TIMELINE = [
   ["2023", "Boshlanish", "Kichik jamoa sifatida birinchi lending sahifalar va brending loyihalarini yaratishni boshladik."],
   ["2024", "Birinchi yirik mijozlar", "Redmar uchun brend va CRM tizimi, Highline va Maktab TOP loyihalari — jamoa kengaydi."],
-  ["2025", "Mobil yo'nalish va 100+ loyiha", "Mobil ilovalar bo'limini ochdik, G'azna Bank va Logitech UZ bilan hamkorlik qildik."],
+  ["2025", "Mobil yo'nalish va 100+ loyiha", "Mobil ilovalar bo'limini ochdik va Logitech UZ bilan hamkorlik qildik."],
   ["2026", "Xalqaro bozor", "Qozog'iston va BAA'dagi mijozlar uchun mahsulotlar yaratyapmiz. Keyingisi — sizning loyihangiz."],
 ]
 

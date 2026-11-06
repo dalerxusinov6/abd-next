@@ -1,47 +1,6 @@
 {
   "projects": [
     {
-      "id": "p1",
-      "slug": "gazna-bank-app",
-      "name": "G'azna Bank",
-      "type": "Mobil ilova",
-      "category": "mobile",
-      "year": 2025,
-      "client": "G'azna Bank",
-      "duration": "4 oy",
-      "description": "Bank mijozlari uchun mobil ilova: tezkor o'tkazmalar, kartalarni boshqarish va shaxsiy moliya tahlili.",
-      "task": "Eski ilova sekin ishlardi va foydalanuvchilar o'tkazma qilish uchun 6 ta ekrandan o'tishi kerak edi. Bank yosh auditoriyani jalb qiladigan zamonaviy ilova istadi.",
-      "solution": "Biz o'tkazmani 2 bosqichga qisqartirdik, biometrik kirish va bitta bosishda to'lov shablonlarini qo'shdik. 40+ ekran yagona dizayn tizimida yig'ildi.",
-      "services": [
-        "UX tadqiqot",
-        "UI dizayn",
-        "Dizayn tizim",
-        "Flutter"
-      ],
-      "results": [
-        {
-          "value": "2x",
-          "label": "Tezroq o'tkazma"
-        },
-        {
-          "value": "4.9",
-          "label": "App Store reytingi"
-        },
-        {
-          "value": "+65%",
-          "label": "Faol foydalanuvchilar"
-        }
-      ],
-      "color": "#1d3b8b",
-      "accent": "#60a5fa",
-      "visual": "phone",
-      "logoText": "",
-      "cover": null,
-      "gallery": [],
-      "published": true,
-      "order": 0
-    },
-    {
       "id": "p2",
       "slug": "maktab-top",
       "name": "Maktab TOP",
@@ -320,46 +279,6 @@
       "gallery": [],
       "published": true,
       "order": 7
-    },
-    {
-      "id": "p9",
-      "slug": "gazna-bank-web",
-      "name": "G'azna Bank",
-      "type": "Veb dizayn",
-      "category": "web",
-      "year": 2025,
-      "client": "G'azna Bank",
-      "duration": "2 oy",
-      "description": "Bankning korporativ veb-sayti.",
-      "task": "Bank sayti eskirgan, mobil qurilmalarda noqulay va arizalar faqat filialda qabul qilinardi.",
-      "solution": "Kredit kalkulyatori, filiallar xaritasi va onlayn arizali yangi korporativ sayt yaratdik.",
-      "services": [
-        "Veb dizayn",
-        "Dasturlash",
-        "SEO"
-      ],
-      "results": [
-        {
-          "value": "+50%",
-          "label": "Onlayn arizalar"
-        },
-        {
-          "value": "98",
-          "label": "Lighthouse"
-        },
-        {
-          "value": "2",
-          "label": "Oy"
-        }
-      ],
-      "color": "#2563eb",
-      "accent": "#ffffff",
-      "visual": "laptop",
-      "logoText": "",
-      "cover": null,
-      "gallery": [],
-      "published": true,
-      "order": 8
     }
   ],
   "clients": [
@@ -383,13 +302,6 @@
       "logo": null,
       "url": "",
       "order": 2
-    },
-    {
-      "id": "c4",
-      "name": "G'azna Bank",
-      "logo": null,
-      "url": "",
-      "order": 3
     },
     {
       "id": "c5",
@@ -470,14 +382,6 @@
       "text": "CRM tizimi tufayli omborxona va buyurtmalarni boshqarish ikki baravar tezlashdi. Rahmat, jamoa!",
       "color": "#fbbf24",
       "order": 2
-    },
-    {
-      "id": "t4",
-      "name": "Nodira Tursunova",
-      "role": "G'azna Bank · Mahsulot menejeri",
-      "text": "Mobil ilovamiz dizayni foydalanuvchilardan juda ko'p ijobiy fikr oldi. App Store reytingi 4.9 ga chiqdi.",
-      "color": "#4ade80",
-      "order": 3
     },
     {
       "id": "t5",
