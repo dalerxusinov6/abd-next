@@ -28,7 +28,7 @@
         },
         {
           "value": "3.2 daq",
-          "label": "Ōrtaça sessiya"
+          "label": "Örtaça sessiya"
         }
       ],
       "color": "#cbd5e1",
@@ -100,8 +100,8 @@
       "client": "Highline",
       "duration": "6 hafta",
       "description": "Fintech startapi uçun logotip, ranglar palitrasi, tipografika va brendbuk.",
-      "task": "Yangi fintech startapiga investorlar va mijozlar oldida jiddiy, lekin zamonaviy kōrinadigan brend kerak edi.",
-      "solution": "Tezlik va ōsişni ifodalovçi belgi, çeklangan rang palitrasi va qat’iy tipografik tizim işlab çiqdik. Brendbuk 60 sahifadan iborat.",
+      "task": "Yangi fintech startapiga investorlar va mijozlar oldida jiddiy, lekin zamonaviy körinadigan brend kerak edi.",
+      "solution": "Tezlik va ösişni ifodalovçi belgi, çeklangan rang palitrasi va qat’iy tipografik tizim işlab çiqdik. Brendbuk 60 sahifadan iborat.",
       "services": [
         "Logotip",
         "Brendbuk",
@@ -194,7 +194,7 @@
       "client": "Roll Biscuit",
       "duration": "1 oy",
       "description": "Peçenye mahsulotlari uçun yorqin qadoq seriyasi.",
-      "task": "Dōkon peştaxtasida mahsulot raqobatçilar orasida kōrinmay qolardi.",
+      "task": "Dökon peştaxtasida mahsulot raqobatçilar orasida körinmay qolardi.",
       "solution": "6 ta ta’m uçun yorqin, bir-biridan oson ajraladigan qadoq seriyasini yaratdik.",
       "services": [
         "Qadoq",
@@ -208,11 +208,11 @@
         },
         {
           "value": "+30%",
-          "label": "Sotuv ōsişi"
+          "label": "Sotuv ösişi"
         },
         {
           "value": "12",
-          "label": "Dōkon tarmoği"
+          "label": "Dökon tarmoği"
         }
       ],
       "color": "#f7b2c9",
@@ -288,8 +288,8 @@
       "client": "Cabin Rent",
       "duration": "3 hafta",
       "description": "Toğdagi dam oliş uylari uçun bron qiliş lendingi.",
-      "task": "Mijozlar Instagram orqali bron qilardi — bu kōp vaqt olardi va buyurtmalar yōqolardi.",
-      "solution": "Atmosferik vizual, onlayn kalendar va tōlov bilan bitta sahifali bron qiliş saytini yaratdik.",
+      "task": "Mijozlar Instagram orqali bron qilardi — bu köp vaqt olardi va buyurtmalar yöqolardi.",
+      "solution": "Atmosferik vizual, onlayn kalendar va tölov bilan bitta sahifali bron qiliş saytini yaratdik.",
       "services": [
         "Lending",
         "Bron tizimi",
@@ -306,7 +306,7 @@
         },
         {
           "value": "0",
-          "label": "Yōqolgan buyurtma"
+          "label": "Yöqolgan buyurtma"
         }
       ],
       "color": "#1b2537",
@@ -328,7 +328,7 @@
       "client": "Redmar",
       "duration": "3 oy",
       "description": "Savdo tarmoği uçun brend yangilanişi va içki CRM tizimi.",
-      "task": "Buyurtmalar, ombor va hisobotlar Excel fayllarda yuritilardi — xatolar kōp edi.",
+      "task": "Buyurtmalar, ombor va hisobotlar Excel fayllarda yuritilardi — xatolar köp edi.",
       "solution": "Barça jarayonlarni bitta panelga yiğadigan CRM va Telegram bot yaratdik. Brend ham yangilandi.",
       "services": [
         "Brending",
@@ -423,7 +423,7 @@
       "duration": "5 hafta",
       "description": "Turar-joy majmuasi uçun premium brend identifikatsiyasi.",
       "task": "Premium turar-joy majmuasi bozorda boşqa qurilişlardan ajralib turişi kerak edi.",
-      "solution": "Nafis belgi, tinç ranglar va sotuv bōlimi uçun tōliq materiallar tōplamini işlab çiqdik.",
+      "solution": "Nafis belgi, tinç ranglar va sotuv bölimi uçun töliq materiallar töplamini işlab çiqdik.",
       "services": [
         "Brend",
         "Bosma",
@@ -515,12 +515,12 @@
       "year": 2025,
       "client": "Logitech UZ",
       "duration": "3 oy",
-      "description": "Rasmiy distribyutor uçun internet-dōkon.",
-      "task": "Rasmiy distribyutorda onlayn sotuv kanali yōq edi, mijozlar marketpleyslarga ketardi.",
-      "solution": "Katalog, savat, Payme/Click integratsiyasi va admin panelli internet-dōkon yaratdik.",
+      "description": "Rasmiy distribyutor uçun internet-dökon.",
+      "task": "Rasmiy distribyutorda onlayn sotuv kanali yöq edi, mijozlar marketpleyslarga ketardi.",
+      "solution": "Katalog, savat, Payme/Click integratsiyasi va admin panelli internet-dökon yaratdik.",
       "services": [
         "e-Commerce",
-        "Tōlov integratsiyasi",
+        "Tölov integratsiyasi",
         "Admin panel"
       ],
       "results": [
@@ -653,7 +653,7 @@
   "faq": [
     {
       "id": "f1",
-      "question": "Işlaringizning ōziga xosligi nimada?",
+      "question": "Işlaringizning öziga xosligi nimada?",
       "answer": "Har bir loyihani biznes maqsadlaridan boşlaymiz: tadqiqot, prototip, dizayn va dasturlaş bitta jamoada bajariladi — şuning uçun natija tez va izçil.",
       "order": 0,
       "tr": {
@@ -670,7 +670,7 @@
     {
       "id": "f2",
       "question": "Pulni qaytarib berasizmi?",
-      "answer": "Ha. Agar birinçi bosqiç natijasi sizni qoniqtirmasa, oldindan tōlovni tōliq qaytaramiz.",
+      "answer": "Ha. Agar birinçi bosqiç natijasi sizni qoniqtirmasa, oldindan tölovni töliq qaytaramiz.",
       "order": 1,
       "tr": {
         "ru": {
@@ -685,8 +685,8 @@
     },
     {
       "id": "f3",
-      "question": "Qanday tōlov turlarini qabul qilasiz?",
-      "answer": "Bank ōtkazmasi, Payme, Click, Uzcard/Humo kartalari va xalqaro mijozlar uçun Visa/Mastercard.",
+      "question": "Qanday tölov turlarini qabul qilasiz?",
+      "answer": "Bank ötkazmasi, Payme, Click, Uzcard/Humo kartalari va xalqaro mijozlar uçun Visa/Mastercard.",
       "order": 2,
       "tr": {
         "ru": {
@@ -721,7 +721,7 @@
       "id": "t1",
       "name": "Abdulloh Ergashev",
       "role": "Grafik dizayner · Mijoz",
-      "text": "ABD Group bilan işlaş juda qulay bōldi. Saytimiz muddatidan oldin tayyor bōldi va sotuvlar 40% oşdi.",
+      "text": "ABD Group bilan işlaş juda qulay böldi. Saytimiz muddatidan oldin tayyor böldi va sotuvlar 40% oşdi.",
       "color": "#00c8ff",
       "order": 0,
       "tr": {
@@ -797,7 +797,7 @@
     "phone": "+998 50 020 56 44",
     "email": "hello@abdgroup.uz",
     "telegram": "@abdgroup",
-    "address": "Toşkent, Ōzbekiston",
+    "address": "Toşkent, Özbekiston",
     "tr": {
       "ru": {
         "heroWords": [

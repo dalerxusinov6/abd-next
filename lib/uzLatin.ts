@@ -1,6 +1,6 @@
 /*
  * Converts Uzbek text from the old Latin spelling to the new alphabet:
- *   o' → ō, g' → ğ, sh → ş, ch → ç, other apostrophes (tutuq belgisi) → ’
+ *   o' → ö, g' → ğ, sh → ş, ch → ç, other apostrophes (tutuq belgisi) → ’
  * Used on the Uzbek fields of admin forms, so text typed either way ends up the same.
  * Text already in the new alphabet passes through unchanged.
  */
@@ -19,8 +19,8 @@ const looksEnglish = (w: string) => /w|th|ph|ck|c(?!h)|tion$|ee|oo/i.test(w);
 
 function word(w: string): string {
   let out = w
-    .replace(new RegExp(`O[${APOS}]`, "g"), "Ō")
-    .replace(new RegExp(`o[${APOS}]`, "g"), "ō")
+    .replace(new RegExp(`O[${APOS}]`, "g"), "Ö")
+    .replace(new RegExp(`o[${APOS}]`, "g"), "ö")
     .replace(new RegExp(`G[${APOS}]`, "g"), "Ğ")
     .replace(new RegExp(`g[${APOS}]`, "g"), "ğ");
   const bare = out.replace(new RegExp(`[${APOS}]`, "g"), "").toLowerCase();

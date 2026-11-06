@@ -9,7 +9,7 @@ export const DEFAULT_LANG: Lang = "uz";
 export const EXTRA_LANGS = ["ru", "en"] as const;
 export type ExtraLang = (typeof EXTRA_LANGS)[number];
 
-export const LANG_LABELS: Record<Lang, string> = { uz: "Ōzbekça", ru: "Русский", en: "English" };
+export const LANG_LABELS: Record<Lang, string> = { uz: "Özbekça", ru: "Русский", en: "English" };
 
 export const isLang = (v: string | undefined): v is Lang => (LANGS as readonly string[]).includes(v ?? "");
 

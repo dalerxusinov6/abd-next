@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { isLang } from "@/lib/i18n";
 import "./globals.css";
 
-// latin-ext: Ş Ğ Ō of the new Uzbek Latin alphabet
+// latin-ext: Ş and Ğ of the new Uzbek Latin alphabet (Ö and Ç are in latin)
 const outfit = Outfit({ subsets: ["latin", "latin-ext"], weight: ["300", "400", "500", "600", "700", "800"], variable: "--font-outfit", display: "swap" });
 // Outfit has no Cyrillic: Onest (a similar geometric face) draws the Russian glyphs.
 const onest = Onest({ subsets: ["cyrillic"], weight: ["300", "400", "500", "600", "700", "800"], variable: "--font-cyr", display: "swap" });
