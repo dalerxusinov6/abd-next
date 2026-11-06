@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 /*
  * All DOM-level motion of the public site: page curtain, header hide,
@@ -11,7 +11,6 @@ import { useEffect, useRef } from "react";
 export default function SiteEffects() {
   const path = usePathname();
   const router = useRouter();
-  const first = useRef(true);
 
   /* ---------- once: curtain, link interception, header, cursor, toast ---------- */
   useEffect(() => {
@@ -103,11 +102,10 @@ export default function SiteEffects() {
   /* ---------- every page: reveals, dots, parallax, tilt, magnets, timeline ---------- */
   useEffect(() => {
     const body = document.body;
-    if (!first.current) {
-      body.classList.remove("is-leaving");
-      body.classList.remove("menu-open");
-    }
-    first.current = false;
+    // New page is in: lift the curtain. Not tied to "not the first render": switching
+    // language remounts the whole [lang] layout, so this component starts fresh then.
+    body.classList.remove("is-leaving");
+    body.classList.remove("menu-open");
 
     const $$ = <T extends Element = HTMLElement>(s: string) => [...document.querySelectorAll<T>(s)];
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
