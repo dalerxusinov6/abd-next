@@ -8,7 +8,11 @@ import type { Lang } from "./i18n";
 const uz = {
   meta: {
     title: "ABD Group — Raqamli yeçimlar studiyasi",
-    description: "ABD Group: veb-saytlar, mobil ilovalar, brending va CRM tizimlari.",
+    description: "ABD Group — Toşkentdagi raqamli studiya: veb-saytlar, mobil ilovalar, brending, UI/UX dizayn va CRM tizimlari. Ğoyadan işga tuşirişgaça bitta jamoa.",
+    portfolio: "ABD Group portfoliosi: veb-saytlar, mobil ilovalar, brending va CRM loyihalari. Har bir işning vazifasi, yeçimi va natijalari.",
+    services: "Veb dasturlaş, brending, UI/UX dizayn va CRM tizimlari. Ğoyadan işga tuşirişgaça — bitta jamoa.",
+    about: "ABD Group — 2023-yildan beri Özbekiston va xorijdagi brendlar uçun raqamli mahsulotlar yaratayotgan jamoa.",
+    contact: "Loyihangiz haqida yozing — 24 soat içida boğlanamiz va bepul baholab beramiz. Telefon, email va Telegram.",
   },
   nav: {
     home: "Boş sahifa", portfolio: "Portfolio", services: "Xizmatlar", about: "Biz haqimizda", contact: "Aloqa",
@@ -128,7 +132,11 @@ export type Dict = typeof uz;
 const ru: Dict = {
   meta: {
     title: "ABD Group — студия цифровых решений",
-    description: "ABD Group: сайты, мобильные приложения, брендинг и CRM-системы.",
+    description: "ABD Group — цифровая студия в Ташкенте: сайты, мобильные приложения, брендинг, UI/UX-дизайн и CRM-системы. От идеи до запуска — одна команда.",
+    portfolio: "Портфолио ABD Group: сайты, мобильные приложения, брендинг и CRM-системы. Задача, решение и результаты каждого проекта.",
+    services: "Веб-разработка, брендинг, UI/UX-дизайн и CRM-системы. От идеи до запуска — одна команда.",
+    about: "ABD Group — команда, которая с 2023 года создаёт цифровые продукты для брендов Узбекистана и других стран.",
+    contact: "Расскажите о проекте — свяжемся в течение 24 часов и бесплатно оценим его. Телефон, email и Telegram.",
   },
   nav: {
     home: "Главная", portfolio: "Портфолио", services: "Услуги", about: "О нас", contact: "Контакты",
@@ -246,7 +254,11 @@ const ru: Dict = {
 const en: Dict = {
   meta: {
     title: "ABD Group — Digital Product Studio",
-    description: "ABD Group: websites, mobile apps, branding and CRM systems.",
+    description: "ABD Group is a digital studio in Tashkent: websites, mobile apps, branding, UI/UX design and CRM systems. From idea to launch, one team.",
+    portfolio: "ABD Group portfolio: websites, mobile apps, branding and CRM systems. The challenge, solution and results of every project.",
+    services: "Web development, branding, UI/UX design and CRM systems. From idea to launch, one team.",
+    about: "ABD Group is a team building digital products for brands in Uzbekistan and abroad since 2023.",
+    contact: "Tell us about your project — we'll reply within 24 hours with a free estimate. Phone, email and Telegram.",
   },
   nav: {
     home: "Home", portfolio: "Portfolio", services: "Services", about: "About", contact: "Contact",

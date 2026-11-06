@@ -31,5 +31,5 @@ export function proxy(req: NextRequest) {
 
 export const config = {
   // admin, uploads, Next internals and static files (anything with a dot) skip the proxy
-  matcher: ["/((?!admin|uploads|_next|img|api|.*\\..*).*)"],
+  matcher: ["/((?!admin|uploads|_next|img|api|apple-icon|icon|.*\\..*).*)"],
 };

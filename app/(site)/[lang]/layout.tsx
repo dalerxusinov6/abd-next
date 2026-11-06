@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { readContent, byOrder } from "@/lib/store";
-import { isLang, lp, loc, LANGS } from "@/lib/i18n";
+import { isLang, lp, loc } from "@/lib/i18n";
 import { dict } from "@/lib/dict";
+import { indexable, jsonLd, organizationLd, siteUrl } from "@/lib/seo";
 import { FooterWord, Header, Newsletter } from "@/components/site/client";
 import SiteEffects from "@/components/site/SiteEffects";
 
@@ -16,9 +17,13 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
   if (!isLang(lang)) return {};
   const t = dict(lang).meta;
   return {
+    metadataBase: new URL(siteUrl()),
     title: { default: t.title, template: "%s — ABD Group" },
     description: t.description,
-    alternates: { languages: Object.fromEntries(LANGS.map((l) => [l, lp(l, "/")])) },
+    applicationName: "ABD Group",
+    // previews and local dev must never end up in search results
+    robots: indexable() ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } } : { index: false, follow: false },
+    formatDetection: { telephone: false, email: false, address: false },
   };
 }
 
@@ -76,6 +81,7 @@ export default async function SiteLayout({ children, params }: Props) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
       </button>
       <div className="toast" role="status" aria-live="polite" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationLd(lang, loc(settings, lang)))} />
       <SiteEffects />
     </>
   );

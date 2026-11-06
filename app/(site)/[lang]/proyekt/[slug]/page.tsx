@@ -5,6 +5,7 @@ import { byOrder, readContent } from "@/lib/store";
 import { Arrow, Eyebrow, Roll, Split, WorkArt } from "@/components/site/ui";
 import { loc, lp, type Lang } from "@/lib/i18n";
 import { dict } from "@/lib/dict";
+import { abs, breadcrumbLd, jsonLd, ORG_ID, pageMeta } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string; lang: string }> };
 
@@ -19,7 +20,14 @@ async function load(slug: string, lang: Lang) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, lang } = await params;
   const data = await load(slug, lang as Lang);
-  return data ? { title: `${data.p.name} — ${data.p.type}`, description: data.p.description } : { title: dict(lang as Lang).project.notFound };
+  if (!data) return { title: dict(lang as Lang).project.notFound, robots: { index: false } };
+  const { p } = data;
+  const title = `${p.name} — ${p.type}`;
+  return pageMeta(lang as Lang, `/proyekt/${p.slug}`, {
+    title,
+    description: p.description || dict(lang as Lang).meta.portfolio,
+    image: p.cover && !p.cover.endsWith(".svg") ? p.cover : `/api/og?lang=${lang}&t=${encodeURIComponent(p.name)}`,
+  });
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -30,6 +38,22 @@ export default async function ProjectPage({ params }: Props) {
   if (!data) notFound();
   const { p, next } = data;
   const shots = p.gallery.length ? p.gallery : null;
+  const d = dict(lang);
+  const work = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: p.name,
+    headline: `${p.name} — ${p.type}`,
+    description: p.description,
+    genre: p.type,
+    dateCreated: String(p.year),
+    inLanguage: lang,
+    url: abs(lp(lang, `/proyekt/${p.slug}`)),
+    creator: { "@id": ORG_ID() },
+    ...(p.services.length ? { keywords: p.services.join(", ") } : {}),
+    ...([p.cover, ...p.gallery].filter((x): x is string => !!x && !x.endsWith(".svg")).length
+      ? { image: [p.cover, ...p.gallery].filter((x): x is string => !!x && !x.endsWith(".svg")).map(abs) } : {}),
+  };
 
   return (
     <>
@@ -100,6 +124,8 @@ export default async function ProjectPage({ params }: Props) {
           </Link>
         </section>
       )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(work)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbLd(lang, [{ name: d.nav.home, path: "/" }, { name: d.nav.portfolio, path: "/portfolio" }, { name: p.name, path: `/proyekt/${p.slug}` }]))} />
     </>
   );
 }

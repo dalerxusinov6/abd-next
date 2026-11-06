@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { breadcrumbLd, faqLd, jsonLd, pageMeta } from "@/lib/seo";
 import { byOrder, readContent } from "@/lib/store";
 import { Eyebrow, PageHero, Split } from "@/components/site/ui";
 import { ContactForm, FaqList } from "@/components/site/client";
@@ -9,7 +10,9 @@ import { dict } from "@/lib/dict";
 type Props = { params: Promise<{ lang: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return { title: dict((await params).lang as Lang).contact.title };
+  const lang = (await params).lang as Lang;
+  const d = dict(lang);
+  return pageMeta(lang, "/aloqa", { title: d.contact.title, description: d.meta.contact, image: `/api/og?lang=${lang}&t=${encodeURIComponent(d.contact.title)}` });
 }
 
 export default async function ContactPage({ params }: Props) {
@@ -53,6 +56,8 @@ export default async function ContactPage({ params }: Props) {
           <FaqList items={byOrder(c.faq).map((x) => loc(x, lang))} />
         </div>
       </section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbLd(lang, [{ name: d.nav.home, path: "/" }, { name: t.title, path: "/aloqa" }]))} />
+      {c.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqLd(byOrder(c.faq).map((x) => loc(x, lang))))} />}
     </>
   );
 }

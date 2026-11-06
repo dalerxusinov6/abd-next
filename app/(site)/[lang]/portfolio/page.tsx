@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { breadcrumbLd, jsonLd, pageMeta } from "@/lib/seo";
 import { byOrder, readContent } from "@/lib/store";
 import { CtaBox, PageHero } from "@/components/site/ui";
 import { Count, PortfolioGrid } from "@/components/site/client";
@@ -8,7 +9,9 @@ import { dict } from "@/lib/dict";
 type Props = { params: Promise<{ lang: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return { title: dict((await params).lang as Lang).portfolio.title };
+  const lang = (await params).lang as Lang;
+  const d = dict(lang);
+  return pageMeta(lang, "/portfolio", { title: d.portfolio.title, description: d.meta.portfolio, image: `/api/og?lang=${lang}&t=${encodeURIComponent(d.portfolio.title)}` });
 }
 
 export default async function PortfolioPage({ params }: Props) {
@@ -34,6 +37,7 @@ export default async function PortfolioPage({ params }: Props) {
         </div>
       </section>
       <CtaBox lang={lang} eyebrow={t.ctaEyebrow} title={t.ctaTitle} button={t.ctaButton} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbLd(lang, [{ name: dict(lang).nav.home, path: "/" }, { name: t.title, path: "/portfolio" }]))} />
     </>
   );
 }

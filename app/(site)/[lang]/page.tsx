@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { faqLd, jsonLd, pageMeta } from "@/lib/seo";
 import { byOrder, readContent } from "@/lib/store";
 import { Arrow, Btn, CtaBox, Eyebrow, Split, WorkCard } from "@/components/site/ui";
 import { Count, FaqList, Testimonials } from "@/components/site/client";
@@ -9,6 +11,12 @@ import { dict } from "@/lib/dict";
 
 const HOME_SIZES = ["w-5 tall", "w-7", "w-7", "w-5", "w-6", "w-6"];
 const TECH = ["Figma", "React", "Next.js", "Python", "Flutter", "Node.js", "Laravel"];
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const lang = (await params).lang as Lang;
+  const m = dict(lang).meta;
+  return pageMeta(lang, "/", { title: m.title, absoluteTitle: true, description: m.description, image: `/api/og?lang=${lang}&t=${encodeURIComponent(m.title)}` });
+}
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const lang = (await params).lang as Lang; // validated by the layout
@@ -154,6 +162,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       <CtaBox lang={lang} eyebrow={h.ctaEyebrow} title={h.ctaTitle} button={h.ctaButton} />
+      {c.faq.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqLd(byOrder(c.faq).map((x) => loc(x, lang))))} />}
     </>
   );
 }

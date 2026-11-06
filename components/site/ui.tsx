@@ -93,7 +93,7 @@ export function WorkArt({ p, image, dim, sizes = CARD_SIZES, priority }: { p: Pr
   return (
     <div className="work-art" style={{ background: p.color, filter: dim ? "brightness(.82)" : undefined }}>
       {src
-        ? <Image className="cover-img" src={src} alt="" fill sizes={sizes} priority={priority} unoptimized={src.endsWith(".svg")} />
+        ? <Image className="cover-img" src={src} alt={p.name} fill sizes={sizes} priority={priority} unoptimized={src.endsWith(".svg")} />
         : <WorkVisual p={p} />}
     </div>
   );

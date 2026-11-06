@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { breadcrumbLd, jsonLd, pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import { byOrder, readContent } from "@/lib/store";
 import { CtaBox, Eyebrow, PageHero, Split, initials } from "@/components/site/ui";
@@ -9,7 +10,9 @@ import { dict } from "@/lib/dict";
 type Props = { params: Promise<{ lang: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return { title: dict((await params).lang as Lang).about.title };
+  const lang = (await params).lang as Lang;
+  const d = dict(lang);
+  return pageMeta(lang, "/biz-haqimizda", { title: d.about.title, description: d.meta.about, image: `/api/og?lang=${lang}&t=${encodeURIComponent(d.about.title)}` });
 }
 
 const VALUE_ICONS = [
@@ -72,6 +75,7 @@ export default async function AboutPage({ params }: Props) {
         </div>
       </section>}
       <CtaBox lang={lang} eyebrow={t.ctaEyebrow} title={t.ctaTitle} button={t.ctaButton} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbLd(lang, [{ name: dict(lang).nav.home, path: "/" }, { name: t.title, path: "/biz-haqimizda" }]))} />
     </>
   );
 }
