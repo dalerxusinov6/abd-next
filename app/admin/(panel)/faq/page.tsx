@@ -1,8 +1,11 @@
 import { byOrder, readContent } from "@/lib/store";
 import { ActButton, ActionForm } from "@/components/admin/forms";
+import { TrFields } from "@/components/admin/TrFields";
 import { deleteFaq, moveFaq, saveFaq } from "../../actions";
 
 export const metadata = { title: "FAQ" };
+
+const FAQ_TR = [{ name: "question", label: "Savol", max: 300 }, { name: "answer", label: "Javob", kind: "area" as const, max: 3000 }];
 
 export default async function FaqAdmin() {
   const faq = byOrder((await readContent()).faq);
@@ -15,6 +18,7 @@ export default async function FaqAdmin() {
         <ActionForm action={saveFaq} submit="Qo'shish" resetOnSuccess>
           <label className="a-field"><span className="a-label">Savol *</span><input name="question" required maxLength={300} /></label>
           <label className="a-field"><span className="a-label">Javob *</span><textarea name="answer" required maxLength={3000} /></label>
+          <TrFields compact fields={FAQ_TR} />
         </ActionForm>
       </div>
 
@@ -25,6 +29,7 @@ export default async function FaqAdmin() {
               <input type="hidden" name="id" value={f.id} />
               <label className="a-field"><span className="a-label">Savol {i + 1}</span><input name="question" required defaultValue={f.question} maxLength={300} /></label>
               <label className="a-field"><span className="a-label">Javob</span><textarea name="answer" required defaultValue={f.answer} maxLength={3000} /></label>
+              <TrFields compact fields={FAQ_TR} tr={f.tr} />
             </ActionForm>
             <div className="a-item-side">
               <ActButton action={moveFaq} fields={{ id: f.id, dir: -1 }} className="a-btn icon sm" title="Yuqoriga">↑</ActButton>

@@ -2,6 +2,7 @@ import { byOrder, readContent } from "@/lib/store";
 import { ActButton, ActionForm, ImageField } from "@/components/admin/forms";
 import { deleteMember, moveMember, saveMember } from "../../actions";
 import type { Member } from "@/lib/types";
+import { TrFields } from "@/components/admin/TrFields";
 
 export const metadata = { title: "Jamoa" };
 
@@ -17,6 +18,7 @@ const Fields = ({ m }: { m?: Member }) => (
         <span className="a-label">Rang (rasm bo&apos;lmasa)</span>
         <input type="color" name="color" defaultValue={m?.color ?? "#0e7490"} />
       </label>
+      <TrFields compact tr={m?.tr} fields={[{ name: "role", label: "Lavozim", max: 120 }]} />
     </div>
   </div>
 );

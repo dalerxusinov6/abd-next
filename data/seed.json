@@ -38,7 +38,57 @@
       "cover": null,
       "gallery": [],
       "published": true,
-      "order": 1
+      "order": 1,
+      "tr": {
+        "ru": {
+          "type": "Веб-дизайн",
+          "duration": "1 месяц",
+          "description": "Рейтинг школ и платформа поиска для родителей.",
+          "task": "Родителям было трудно найти достоверную информацию при выборе школы для ребёнка. Данные были разрозненными и устаревшими.",
+          "solution": "Создали платформу с фильтрами, картой и отдельной страницей для каждой школы. Данные обновляются через админ-панель.",
+          "services": [
+            "Веб-дизайн"
+          ],
+          "results": [
+            {
+              "value": "1200+",
+              "label": "Школ в базе"
+            },
+            {
+              "value": "10k",
+              "label": "Посещений в месяц"
+            },
+            {
+              "value": "3.2 мин",
+              "label": "Средняя сессия"
+            }
+          ]
+        },
+        "en": {
+          "type": "Web design",
+          "duration": "1 month",
+          "description": "A school ranking and search platform for parents.",
+          "task": "Parents couldn't find reliable information when choosing a school for their child. The data was scattered and outdated.",
+          "solution": "We built a platform with filters, a map and a dedicated page for every school. The data is updated through an admin panel.",
+          "services": [
+            "Web design"
+          ],
+          "results": [
+            {
+              "value": "1200+",
+              "label": "Schools in the database"
+            },
+            {
+              "value": "10k",
+              "label": "Monthly visits"
+            },
+            {
+              "value": "3.2 min",
+              "label": "Average session"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "p3",
@@ -78,7 +128,61 @@
       "cover": null,
       "gallery": [],
       "published": true,
-      "order": 2
+      "order": 2,
+      "tr": {
+        "ru": {
+          "type": "Брендинг",
+          "duration": "6 недель",
+          "description": "Логотип, цветовая палитра, типографика и брендбук для финтех-стартапа.",
+          "task": "Новому финтех-стартапу нужен был бренд, который выглядит серьёзно, но современно в глазах инвесторов и клиентов.",
+          "solution": "Разработали знак, передающий скорость и рост, сдержанную палитру и строгую типографическую систему. Брендбук — 60 страниц.",
+          "services": [
+            "Логотип",
+            "Брендбук",
+            "Презентация"
+          ],
+          "results": [
+            {
+              "value": "60",
+              "label": "Страниц брендбука"
+            },
+            {
+              "value": "$50.000",
+              "label": "Привлечённых инвестиций"
+            },
+            {
+              "value": "2",
+              "label": "Недели"
+            }
+          ]
+        },
+        "en": {
+          "type": "Branding",
+          "duration": "6 weeks",
+          "description": "Logo, colour palette, typography and brand book for a fintech startup.",
+          "task": "A new fintech startup needed a brand that looks serious yet modern to investors and customers.",
+          "solution": "We designed a mark that conveys speed and growth, a restrained palette and a strict typographic system. The brand book runs to 60 pages.",
+          "services": [
+            "Logo",
+            "Brand book",
+            "Pitch deck"
+          ],
+          "results": [
+            {
+              "value": "60",
+              "label": "Brand book pages"
+            },
+            {
+              "value": "$50,000",
+              "label": "Investment raised"
+            },
+            {
+              "value": "2",
+              "label": "Weeks"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "p4",
@@ -118,7 +222,61 @@
       "cover": null,
       "gallery": [],
       "published": true,
-      "order": 3
+      "order": 3,
+      "tr": {
+        "ru": {
+          "type": "Дизайн упаковки",
+          "duration": "1 месяц",
+          "description": "Яркая серия упаковки для печенья.",
+          "task": "На полке магазина продукт терялся среди конкурентов.",
+          "solution": "Создали яркую серию упаковки для 6 вкусов, которые легко отличить друг от друга.",
+          "services": [
+            "Упаковка",
+            "Иллюстрация",
+            "Печать"
+          ],
+          "results": [
+            {
+              "value": "6",
+              "label": "Вкусов в серии"
+            },
+            {
+              "value": "+30%",
+              "label": "Рост продаж"
+            },
+            {
+              "value": "12",
+              "label": "Торговых сетей"
+            }
+          ]
+        },
+        "en": {
+          "type": "Packaging design",
+          "duration": "1 month",
+          "description": "A bright packaging series for biscuits.",
+          "task": "On store shelves, the product got lost among its competitors.",
+          "solution": "We created a bright packaging series for 6 flavours that are easy to tell apart.",
+          "services": [
+            "Packaging",
+            "Illustration",
+            "Print"
+          ],
+          "results": [
+            {
+              "value": "6",
+              "label": "Flavours in the series"
+            },
+            {
+              "value": "+30%",
+              "label": "Sales growth"
+            },
+            {
+              "value": "12",
+              "label": "Retail chains"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "p5",
@@ -198,7 +356,61 @@
       "cover": null,
       "gallery": [],
       "published": true,
-      "order": 5
+      "order": 5,
+      "tr": {
+        "ru": {
+          "type": "Брендинг · CRM",
+          "duration": "3 месяца",
+          "description": "Обновление бренда и внутренняя CRM-система для торговой сети.",
+          "task": "Заказы, склад и отчёты велись в Excel-файлах — ошибок было много.",
+          "solution": "Создали CRM и Telegram-бот, которые собирают все процессы в одной панели. Бренд тоже обновили.",
+          "services": [
+            "Брендинг",
+            "CRM",
+            "Telegram-бот"
+          ],
+          "results": [
+            {
+              "value": "100%",
+              "label": "Без бумаг"
+            },
+            {
+              "value": "2x",
+              "label": "Быстрее заказы"
+            },
+            {
+              "value": "35",
+              "label": "Филиалов подключено"
+            }
+          ]
+        },
+        "en": {
+          "type": "Branding · CRM",
+          "duration": "3 months",
+          "description": "A brand refresh and an internal CRM system for a retail chain.",
+          "task": "Orders, inventory and reports were kept in Excel files, and mistakes were common.",
+          "solution": "We built a CRM and a Telegram bot that bring every process into one dashboard. The brand was refreshed too.",
+          "services": [
+            "Branding",
+            "CRM",
+            "Telegram bot"
+          ],
+          "results": [
+            {
+              "value": "100%",
+              "label": "Paperless"
+            },
+            {
+              "value": "2x",
+              "label": "Faster orders"
+            },
+            {
+              "value": "35",
+              "label": "Branches connected"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "p7",
@@ -238,7 +450,61 @@
       "cover": null,
       "gallery": [],
       "published": true,
-      "order": 6
+      "order": 6,
+      "tr": {
+        "ru": {
+          "type": "Брендинг",
+          "duration": "5 недель",
+          "description": "Премиальная айдентика для жилого комплекса.",
+          "task": "Премиальный жилой комплекс должен был выделяться среди других застроек на рынке.",
+          "solution": "Разработали изящный знак, спокойную палитру и полный комплект материалов для отдела продаж.",
+          "services": [
+            "Бренд",
+            "Печать",
+            "Материалы для продаж"
+          ],
+          "results": [
+            {
+              "value": "5",
+              "label": "Недель"
+            },
+            {
+              "value": "40+",
+              "label": "Материалов"
+            },
+            {
+              "value": "70%",
+              "label": "Предпродажи"
+            }
+          ]
+        },
+        "en": {
+          "type": "Branding",
+          "duration": "5 weeks",
+          "description": "A premium brand identity for a residential complex.",
+          "task": "A premium residential complex needed to stand out from other developments on the market.",
+          "solution": "We designed an elegant mark, a calm palette and a full set of materials for the sales team.",
+          "services": [
+            "Brand",
+            "Print",
+            "Sales materials"
+          ],
+          "results": [
+            {
+              "value": "5",
+              "label": "Weeks"
+            },
+            {
+              "value": "40+",
+              "label": "Materials"
+            },
+            {
+              "value": "70%",
+              "label": "Pre-sales"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "p8",
@@ -278,7 +544,59 @@
       "cover": null,
       "gallery": [],
       "published": true,
-      "order": 7
+      "order": 7,
+      "tr": {
+        "ru": {
+          "duration": "3 месяца",
+          "description": "Интернет-магазин для официального дистрибьютора.",
+          "task": "У официального дистрибьютора не было онлайн-канала продаж — клиенты уходили на маркетплейсы.",
+          "solution": "Создали интернет-магазин с каталогом, корзиной, интеграцией Payme/Click и админ-панелью.",
+          "services": [
+            "e-Commerce",
+            "Интеграция платежей",
+            "Админ-панель"
+          ],
+          "results": [
+            {
+              "value": "800+",
+              "label": "Товаров"
+            },
+            {
+              "value": "+3x",
+              "label": "Онлайн-продажи"
+            },
+            {
+              "value": "1.2 с",
+              "label": "Время загрузки"
+            }
+          ]
+        },
+        "en": {
+          "duration": "3 months",
+          "description": "An online store for an official distributor.",
+          "task": "The official distributor had no online sales channel, so customers went to marketplaces.",
+          "solution": "We built an online store with a catalog, cart, Payme/Click integration and an admin panel.",
+          "services": [
+            "e-Commerce",
+            "Payment integration",
+            "Admin panel"
+          ],
+          "results": [
+            {
+              "value": "800+",
+              "label": "Products"
+            },
+            {
+              "value": "+3x",
+              "label": "Online sales"
+            },
+            {
+              "value": "1.2s",
+              "label": "Load time"
+            }
+          ]
+        }
+      }
     }
   ],
   "clients": [
@@ -337,25 +655,65 @@
       "id": "f1",
       "question": "Ishlaringizning o'ziga xosligi nimada?",
       "answer": "Har bir loyihani biznes maqsadlaridan boshlaymiz: tadqiqot, prototip, dizayn va dasturlash bitta jamoada bajariladi — shuning uchun natija tez va izchil.",
-      "order": 0
+      "order": 0,
+      "tr": {
+        "ru": {
+          "question": "В чём особенность вашей работы?",
+          "answer": "Каждый проект мы начинаем с бизнес-целей: исследование, прототип, дизайн и разработка выполняются одной командой — поэтому результат получается быстрым и цельным."
+        },
+        "en": {
+          "question": "What makes your work different?",
+          "answer": "We start every project with your business goals: research, prototyping, design and development are all done by one team, so the result is fast and consistent."
+        }
+      }
     },
     {
       "id": "f2",
       "question": "Pulni qaytarib berasizmi?",
       "answer": "Ha. Agar birinchi bosqich natijasi sizni qoniqtirmasa, oldindan to'lovni to'liq qaytaramiz.",
-      "order": 1
+      "order": 1,
+      "tr": {
+        "ru": {
+          "question": "Вы возвращаете деньги?",
+          "answer": "Да. Если результат первого этапа вас не устроит, мы полностью вернём предоплату."
+        },
+        "en": {
+          "question": "Do you offer refunds?",
+          "answer": "Yes. If you're not happy with the result of the first stage, we'll refund your advance payment in full."
+        }
+      }
     },
     {
       "id": "f3",
       "question": "Qanday to'lov turlarini qabul qilasiz?",
       "answer": "Bank o'tkazmasi, Payme, Click, Uzcard/Humo kartalari va xalqaro mijozlar uchun Visa/Mastercard.",
-      "order": 2
+      "order": 2,
+      "tr": {
+        "ru": {
+          "question": "Какие способы оплаты вы принимаете?",
+          "answer": "Банковский перевод, Payme, Click, карты Uzcard/Humo и Visa/Mastercard для международных клиентов."
+        },
+        "en": {
+          "question": "Which payment methods do you accept?",
+          "answer": "Bank transfer, Payme, Click, Uzcard/Humo cards, and Visa/Mastercard for international clients."
+        }
+      }
     },
     {
       "id": "f4",
       "question": "Loyiha qancha vaqt oladi?",
       "answer": "Lending sahifa — 1–2 hafta, korporativ sayt — 3–6 hafta, mobil ilova yoki CRM — 2–4 oy.",
-      "order": 3
+      "order": 3,
+      "tr": {
+        "ru": {
+          "question": "Сколько времени занимает проект?",
+          "answer": "Лендинг — 1–2 недели, корпоративный сайт — 3–6 недель, мобильное приложение или CRM — 2–4 месяца."
+        },
+        "en": {
+          "question": "How long does a project take?",
+          "answer": "A landing page takes 1–2 weeks, a corporate website 3–6 weeks, and a mobile app or CRM 2–4 months."
+        }
+      }
     }
   ],
   "testimonials": [
@@ -365,7 +723,17 @@
       "role": "Grafik dizayner · Mijoz",
       "text": "ABD Group bilan ishlash juda qulay bo'ldi. Saytimiz muddatidan oldin tayyor bo'ldi va sotuvlar 40% oshdi.",
       "color": "#00c8ff",
-      "order": 0
+      "order": 0,
+      "tr": {
+        "ru": {
+          "role": "Графический дизайнер · Клиент",
+          "text": "Работать с ABD Group было очень удобно. Сайт был готов раньше срока, а продажи выросли на 40%."
+        },
+        "en": {
+          "role": "Graphic designer · Client",
+          "text": "Working with ABD Group was a breeze. Our website was ready ahead of schedule and sales grew by 40%."
+        }
+      }
     },
     {
       "id": "t2",
@@ -381,7 +749,17 @@
       "role": "Redmar · Direktor",
       "text": "CRM tizimi tufayli omborxona va buyurtmalarni boshqarish ikki baravar tezlashdi. Rahmat, jamoa!",
       "color": "#fbbf24",
-      "order": 2
+      "order": 2,
+      "tr": {
+        "ru": {
+          "role": "Redmar · Директор",
+          "text": "Благодаря CRM-системе управление складом и заказами стало вдвое быстрее. Спасибо, команда!"
+        },
+        "en": {
+          "role": "Redmar · Director",
+          "text": "Thanks to the CRM system, managing our warehouse and orders became twice as fast. Thank you, team!"
+        }
+      }
     },
     {
       "id": "t5",
@@ -389,7 +767,15 @@
       "role": "Bek & Sons · CEO",
       "text": "Tez javob, aniq muddatlar va ajoyib natija. Keyingi loyihani ham albatta shu jamoa bilan qilamiz.",
       "color": "#f472b6",
-      "order": 4
+      "order": 4,
+      "tr": {
+        "ru": {
+          "text": "Быстрые ответы, чёткие сроки и отличный результат. Следующий проект обязательно сделаем с этой командой."
+        },
+        "en": {
+          "text": "Quick replies, clear deadlines and a great result. We'll definitely do our next project with this team too."
+        }
+      }
     }
   ],
   "messages": [],
@@ -411,7 +797,29 @@
     "phone": "+998 50 020 56 44",
     "email": "hello@abdgroup.uz",
     "telegram": "@abdgroup",
-    "address": "Toshkent, O'zbekiston"
+    "address": "Toshkent, O'zbekiston",
+    "tr": {
+      "ru": {
+        "heroWords": [
+          "сайты",
+          "мобильные приложения",
+          "бренды",
+          "CRM-системы",
+          "UI/UX-дизайн"
+        ],
+        "address": "Ташкент, Узбекистан"
+      },
+      "en": {
+        "heroWords": [
+          "websites",
+          "mobile apps",
+          "brands",
+          "CRM systems",
+          "UI/UX design"
+        ],
+        "address": "Tashkent, Uzbekistan"
+      }
+    }
   },
   "team": [
     {

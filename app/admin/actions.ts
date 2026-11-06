@@ -6,13 +6,33 @@ import { redirect } from "next/navigation";
 import { checkPassword, createSession, destroySession, isConfigured, rateLimited, requireAdmin } from "@/lib/auth";
 import { newId, slugify, updateContent } from "@/lib/store";
 import { deleteUpload, saveUpload, UploadError } from "@/lib/uploads";
-import { CATEGORIES, VISUALS, type ActionState, type Category, type Content, type Visual } from "@/lib/types";
+import { CATEGORIES, VISUALS, type ActionState, type Category, type Content, type Result, type Visual } from "@/lib/types";
+import { EXTRA_LANGS, type Tr } from "@/lib/i18n";
 
 /* ---------- helpers ---------- */
 const s = (fd: FormData, k: string, max = 500) => String(fd.get(k) ?? "").trim().slice(0, max);
 const int = (fd: FormData, k: string, fallback = 0) => { const n = parseInt(s(fd, k, 12), 10); return Number.isFinite(n) ? n : fallback; };
 const color = (fd: FormData, k: string, fallback: string) => { const v = s(fd, k, 9); return /^#[0-9a-f]{6}$/i.test(v) ? v : fallback; };
 const safeUrl = (v: string) => (/^https?:\/\/[^\s]+$/i.test(v) ? v : "");
+/*
+ * Reads the RU/EN fields of a form (named "tr.ru.<field>", see components/admin/TrFields.tsx).
+ * Empty values are dropped, so the site falls back to Uzbek for them.
+ */
+type TrSpec = Record<string, { max: number; kind?: "text" | "list" | "lines" }>;
+function readTr<T>(fd: FormData, spec: TrSpec): Tr<T> | undefined {
+  const out: Record<string, Record<string, string | string[]>> = {};
+  for (const l of EXTRA_LANGS) {
+    const one: Record<string, string | string[]> = {};
+    for (const [k, { max, kind = "text" }] of Object.entries(spec)) {
+      const v = s(fd, `tr.${l}.${k}`, max);
+      if (!v) continue;
+      one[k] = kind === "text" ? v : v.split(kind === "list" ? "," : "\n").map((x) => x.trim()).filter(Boolean).slice(0, 12);
+    }
+    if (Object.keys(one).length) out[l] = one;
+  }
+  return Object.keys(out).length ? (out as Tr<T>) : undefined;
+}
+
 const refresh = () => revalidatePath("/", "layout");
 const fail = (message: string): ActionState => ({ ok: false, message });
 const done = (message = "Saqlandi"): ActionState => ({ ok: true, message });
@@ -81,6 +101,18 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
   const results = [0, 1, 2]
     .map((i) => ({ value: s(fd, `r${i}_value`, 30), label: s(fd, `r${i}_label`, 80) }))
     .filter((r) => r.value || r.label);
+  const tr = readTr<Record<string, unknown>>(fd, {
+    name: { max: 120 }, type: { max: 60 }, duration: { max: 40 }, description: { max: 600 },
+    task: { max: 3000 }, solution: { max: 3000 }, services: { max: 600, kind: "list" },
+    r0_value: { max: 30 }, r1_value: { max: 30 }, r2_value: { max: 30 },
+    r0_label: { max: 80 }, r1_label: { max: 80 }, r2_label: { max: 80 },
+  });
+  // translated results: empty value/label falls back to the Uzbek one (+65%, 3x, …)
+  for (const one of Object.values(tr ?? {}) as Record<string, unknown>[]) {
+    const pick = (k: string) => [0, 1, 2].map((i) => { const v = one[`r${i}_${k}`] as string | undefined; delete one[`r${i}_${k}`]; return v; });
+    const values = pick("value"), labels = pick("label");
+    if ([...values, ...labels].some(Boolean)) one.results = results.map((r, i): Result => ({ value: values[i] || r.value, label: labels[i] || r.label }));
+  }
   const removeGallery = new Set(fd.getAll("gallery_remove").map(String));
   const toDelete: (string | null)[] = [];
   let savedId = id;
@@ -108,6 +140,7 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
       visual: (VISUALS as readonly string[]).includes(visual) ? visual : "logo",
       logoText: s(fd, "logoText", 60),
       published: fd.get("published") === "on",
+      tr: tr as Content["projects"][number]["tr"],
     } as const;
 
     if (existing) {
@@ -193,8 +226,9 @@ export async function saveFaq(_prev: ActionState, fd: FormData): Promise<ActionS
   if (!question || !answer) return fail("Savol va javobni to'ldiring.");
   const err = await save((c) => {
     const ex = id ? c.faq.find((x) => x.id === id) : undefined;
-    if (ex) Object.assign(ex, { question, answer });
-    else c.faq.push({ id: newId("f"), question, answer, order: nextOrder(c.faq) });
+    const tr = readTr<{ question: string; answer: string }>(fd, { question: { max: 300 }, answer: { max: 3000 } });
+    if (ex) Object.assign(ex, { question, answer, tr });
+    else c.faq.push({ id: newId("f"), question, answer, tr, order: nextOrder(c.faq) });
   });
   if (err) return err;
   refresh();
@@ -208,7 +242,7 @@ export async function saveTestimonial(_prev: ActionState, fd: FormData): Promise
   await requireAdmin();
   const id = s(fd, "id", 40), name = s(fd, "name", 120), text = s(fd, "text", 1200);
   if (!name || !text) return fail("Ism va fikr matnini kiriting.");
-  const data = { name, text, role: s(fd, "role", 160), color: color(fd, "color", "#00c8ff") };
+  const data = { name, text, role: s(fd, "role", 160), color: color(fd, "color", "#00c8ff"), tr: readTr<{ role: string; text: string }>(fd, { role: { max: 160 }, text: { max: 1200 } }) };
   const err = await save((c) => {
     const ex = id ? c.testimonials.find((x) => x.id === id) : undefined;
     if (ex) Object.assign(ex, data);
@@ -228,7 +262,7 @@ export async function saveMember(_prev: ActionState, fd: FormData): Promise<Acti
   if (!name) return fail("Ismni kiriting.");
   let photo: string | null;
   try { photo = await saveUpload(fd.get("photo")); } catch (e) { if (e instanceof UploadError) return fail(e.message); throw e; }
-  const data = { name, role: s(fd, "role", 120), color: color(fd, "color", "#0e7490") };
+  const data = { name, role: s(fd, "role", 120), color: color(fd, "color", "#0e7490"), tr: readTr<{ role: string }>(fd, { role: { max: 120 } }) };
   let old: string | null = null;
   const err = await save((c) => {
     const ex = id ? c.team.find((x) => x.id === id) : undefined;
@@ -280,6 +314,7 @@ export async function saveSettings(_prev: ActionState, fd: FormData): Promise<Ac
     email: s(fd, "email", 160),
     telegram: s(fd, "telegram", 60).replace(/^@/, ""),
     address: s(fd, "address", 160),
+    tr: readTr<{ heroWords: string[]; address: string }>(fd, { heroWords: { max: 1000, kind: "lines" }, address: { max: 160 } }),
   };
   const err = await save((c) => { c.settings = settings; });
   if (err) return err;

@@ -1,6 +1,7 @@
+/** Service ids and icons; titles and texts live in lib/dict.ts (services.items). */
 export const SERVICES = [
-  { id: "web", title: "Veb dasturlash", short: "Korporativ saytlardan murakkab veb-ilovalargacha — yuqori sifat va tezlik bilan.", text: "Korporativ saytlar, internet-do'konlar va murakkab veb-ilovalar. Tez yuklanadigan, SEO-ga tayyor va har qanday ekranda chiroyli.", tags: ["Next.js", "React", "Laravel", "Node.js", "Headless CMS"], icon: "M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14" },
-  { id: "brand", title: "Brending", short: "Loyihangiz uchun ijodiy va noyob logotip hamda brendbuk ishlab chiqamiz.", text: "Logotip, ranglar, tipografika va to'liq brendbuk. Brendingiz qayerda bo'lmasin — bir xil va esda qolarli ko'rinadi.", tags: ["Logotip", "Brendbuk", "Qadoq", "Naming"], icon: "M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
-  { id: "uiux", title: "UI/UX dizayn", short: "MindMap, prototip va arxitekturaga asoslangan optimal interfeys yechimlari.", text: "Foydalanuvchi tadqiqoti, MindMap, wireframe va interaktiv prototiplar. Arxitekturaga asoslangan optimal yechim.", tags: ["Figma", "Prototip", "Dizayn tizim", "UX audit"], icon: "M3 3h18v18H3zM3 9h18M9 21V9" },
-  { id: "crm", title: "CRM tizimlari", short: "Qog'oz ishlarni 100% kamaytiradigan elektron boshqaruv tizimlari.", text: "Savdo, ombor, xodimlar va hisobotlarni bitta panelda boshqaring. Qog'ozbozlikni 100% gacha kamaytiramiz.", tags: ["Dashboard", "Telegram bot", "1C integratsiya", "API"], icon: "M3 3v18h18M7 15l4-4 3 3 5-6" },
-];
+  { id: "web", icon: "M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14" },
+  { id: "brand", icon: "M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
+  { id: "uiux", icon: "M3 3h18v18H3zM3 9h18M9 21V9" },
+  { id: "crm", icon: "M3 3v18h18M7 15l4-4 3 3 5-6" },
+] as const;

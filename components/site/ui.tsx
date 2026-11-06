@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Project } from "@/lib/types";
+import { lp, type Lang } from "@/lib/i18n";
+import { dict } from "@/lib/dict";
 
 export const Arrow = ({ className = "arrow" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -91,10 +93,10 @@ export function WorkArt({ p, image, dim }: { p: Project; image?: string | null; 
   );
 }
 
-export function WorkCard({ p, size, delay }: { p: Project; size: string; delay?: number }) {
+export function WorkCard({ p, size, delay, lang }: { p: Project; size: string; delay?: number; lang: Lang }) {
   return (
     <Link
-      href={`/proyekt/${p.slug}`}
+      href={lp(lang, `/proyekt/${p.slug}`)}
       className={`work ${size}`}
       data-cat={p.category}
       data-cursor="view"
@@ -112,24 +114,24 @@ export function WorkCard({ p, size, delay }: { p: Project; size: string; delay?:
   );
 }
 
-export const CtaBox = ({ eyebrow, title, button, href = "/aloqa" }: { eyebrow: string; title: string; button: string; href?: string }) => (
+export const CtaBox = ({ eyebrow, title, button, lang, href = "/aloqa" }: { eyebrow: string; title: string; button: string; lang: Lang; href?: string }) => (
   <section className="section" style={{ paddingTop: 0 }}>
     <div className="container">
       <div className="cta-box" data-reveal="scale">
         <div className="rings" aria-hidden="true"><i /><i /><i /></div>
         <span className="eyebrow">{eyebrow}</span>
         <Split text={title} className="h-1 text-balance" />
-        <Btn href={href}>{button}</Btn>
+        <Btn href={lp(lang, href)}>{button}</Btn>
       </div>
     </div>
   </section>
 );
 
-export const PageHero = ({ crumb, title, lead }: { crumb: string; title: string; lead: string }) => (
+export const PageHero = ({ crumb, title, lead, lang }: { crumb: string; title: string; lead: string; lang: Lang }) => (
   <section className="page-hero">
     <canvas className="dot-field" aria-hidden="true" />
     <div className="container">
-      <div className="crumbs" data-reveal=""><Link href="/">Bosh sahifa</Link> / <span>{crumb}</span></div>
+      <div className="crumbs" data-reveal=""><Link href={lp(lang, "/")}>{dict(lang).nav.home}</Link> / <span>{crumb}</span></div>
       <Split as="h1" className="h-display" text={title} />
       <p className="lead" data-reveal="" data-delay=".3">{lead}</p>
     </div>

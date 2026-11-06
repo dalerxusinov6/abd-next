@@ -1,6 +1,7 @@
 import { ActionForm, GalleryField, ImageField } from "./forms";
 import { saveProject } from "@/app/admin/actions";
 import { CATEGORIES, CATEGORY_LABELS, type Project } from "@/lib/types";
+import { TrFields } from "./TrFields";
 
 const F = ({ label, children, hint }: { label: string; children: React.ReactNode; hint?: string }) => (
   <label className="a-field"><span className="a-label">{label}</span>{children}{hint && <small className="a-hint">{hint}</small>}</label>
@@ -8,6 +9,14 @@ const F = ({ label, children, hint }: { label: string; children: React.ReactNode
 
 export default function ProjectForm({ p }: { p?: Project }) {
   const results = [0, 1, 2].map((i) => p?.results[i] ?? { value: "", label: "" });
+  // translated result labels are shown as r0_label… next to the other fields
+  const trView = Object.fromEntries(Object.entries(p?.tr ?? {}).map(([l, v]) => [l, {
+    ...v,
+    ...Object.fromEntries((v?.results ?? []).flatMap((r, i) => [
+      [`r${i}_label`, r.label === p?.results[i]?.label ? "" : r.label],
+      [`r${i}_value`, r.value === p?.results[i]?.value ? "" : r.value],
+    ])),
+  }]));
   return (
     <ActionForm action={saveProject} submit={p ? "O'zgarishlarni saqlash" : "Loyihani yaratish"}
       extra={<label className="a-check" style={{ marginRight: "auto" }}><input type="checkbox" name="published" defaultChecked={p ? p.published : true} /> Saytda e&apos;lon qilish</label>}>
@@ -49,6 +58,23 @@ export default function ProjectForm({ p }: { p?: Project }) {
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="a-card">
+        <h2>Tarjimalar</h2>
+        <TrFields tr={trView} fields={[
+          { name: "name", label: "Loyiha nomi", max: 120 },
+          { name: "type", label: "Turi", max: 60 },
+          { name: "duration", label: "Muddat", max: 40 },
+          { name: "description", label: "Qisqa tavsif", kind: "area", max: 600 },
+          { name: "task", label: "Vazifa", kind: "area", max: 3000 },
+          { name: "solution", label: "Yechim", kind: "area", max: 3000 },
+          { name: "services", label: "Xizmatlar (vergul bilan)", kind: "list", max: 600 },
+          ...results.flatMap((r, i) => [
+            { name: `r${i}_value`, label: `Natija ${i + 1}: qiymat`, max: 30, placeholder: r.value || undefined },
+            { name: `r${i}_label`, label: `Natija ${i + 1}: matn`, max: 80, placeholder: r.label || undefined },
+          ]),
+        ]} />
       </div>
 
       <div className="a-card">

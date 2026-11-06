@@ -20,8 +20,10 @@
   --radius-sm: 14px;
   --ease: cubic-bezier(.22, 1, .36, 1);
   --ease-in-out: cubic-bezier(.76, 0, .24, 1);
-  --font-display: var(--font-outfit), "Outfit", system-ui, sans-serif;
-  --font-body: var(--font-outfit), "Outfit", system-ui, sans-serif;
+  /* Outfit for Latin, Onest for Cyrillic (Outfit has none). Named directly because
+     next/font's "… Fallback" faces cover every glyph and would hide Onest. */
+  --font-display: "Outfit", "Onest", var(--font-outfit), system-ui, sans-serif;
+  --font-body: "Outfit", "Onest", var(--font-outfit), system-ui, sans-serif;
   --container: 1200px;
 }
 
@@ -107,6 +109,30 @@ body.is-leaving .page-curtain .curtain-logo { opacity: 1; transition-delay: .35s
   border: 1px solid var(--line); color: var(--muted); transition: color .3s, border-color .3s;
 }
 .lang-btn:hover { color: var(--text); border-color: var(--line-2); }
+.lang-btn { display: inline-flex; align-items: center; gap: 6px; }
+.lang-btn svg { width: 14px; transition: transform .4s var(--ease); }
+.lang-switch { position: relative; }
+.lang-switch.open .lang-btn { color: var(--text); border-color: var(--line-2); }
+.lang-switch.open .lang-btn svg { transform: rotate(180deg); }
+.lang-menu {
+  position: absolute; top: calc(100% + 10px); right: 0; min-width: 180px; padding: 6px; border-radius: 18px;
+  background: rgba(10,13,26,.92); border: 1px solid var(--line-2);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  display: grid; gap: 2px;
+  opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top right;
+  transition: opacity .25s, transform .35s var(--ease), visibility 0s .35s;
+}
+.lang-switch.open .lang-menu { opacity: 1; visibility: visible; transform: none; transition: opacity .25s, transform .35s var(--ease); }
+.lang-opt { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; font-size: 14px; color: var(--muted); transition: background-color .25s, color .25s; }
+.lang-opt b { width: 24px; font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--dim); transition: color .25s; }
+.lang-opt:hover { background: var(--surface-2); color: var(--text); }
+.lang-opt.active { color: var(--text); background: rgba(0,200,255,.08); }
+.lang-opt.active b { color: var(--cyan); }
+.mobile-langs { display: flex; gap: 8px; margin-top: 32px; opacity: 0; transition: opacity .5s .5s; }
+body.menu-open .mobile-langs { opacity: 1; }
+.mobile-menu .m-lang { font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: 0; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); opacity: 1; transform: none; display: inline-flex; gap: 8px; }
+.mobile-menu .m-lang span { display: none; }
+.mobile-menu .m-lang.active { color: var(--text); border-color: rgba(0,200,255,.5); background: rgba(0,200,255,.1); }
 .burger { display: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); position: relative; }
 .burger span { position: absolute; left: 13px; right: 13px; height: 1.5px; background: var(--text); transition: transform .4s var(--ease), opacity .3s; }
 .burger span:nth-child(1) { top: 17px; }

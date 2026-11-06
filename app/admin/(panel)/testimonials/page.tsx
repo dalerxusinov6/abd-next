@@ -2,6 +2,7 @@ import { byOrder, readContent } from "@/lib/store";
 import { ActButton, ActionForm } from "@/components/admin/forms";
 import { deleteTestimonial, moveTestimonial, saveTestimonial } from "../../actions";
 import type { Testimonial } from "@/lib/types";
+import { TrFields } from "@/components/admin/TrFields";
 
 export const metadata = { title: "Fikrlar" };
 
@@ -13,6 +14,7 @@ const Fields = ({ t }: { t?: Testimonial }) => (
       <label className="a-field"><span className="a-label">Avatar rangi</span><input type="color" name="color" defaultValue={t?.color ?? "#00c8ff"} /></label>
     </div>
     <label className="a-field"><span className="a-label">Fikr matni *</span><textarea name="text" required defaultValue={t?.text} maxLength={1200} /></label>
+    <TrFields compact tr={t?.tr} fields={[{ name: "role", label: "Lavozim · Kompaniya", max: 160 }, { name: "text", label: "Fikr matni", kind: "area", max: 1200 }]} />
   </>
 );
 

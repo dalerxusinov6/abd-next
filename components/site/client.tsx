@@ -4,60 +4,91 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useActionState, useEffect, useRef, useState } from "react";
 import type { ActionState, Faq, Project, Testimonial } from "@/lib/types";
-import { CATEGORY_LABELS, CATEGORIES } from "@/lib/types";
+import { CATEGORIES } from "@/lib/types";
+import { LANG_LABELS, LANGS, lp, splitPath } from "@/lib/i18n";
+import { dict } from "@/lib/dict";
 import { Roll, WorkCard } from "./ui";
 import { submitContact, subscribe } from "@/app/(site)/actions";
 
-export const NAV = [
-  { href: "/", label: "Bosh sahifa" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/xizmatlar", label: "Xizmatlar" },
-  { href: "/biz-haqimizda", label: "Biz haqimizda" },
-  { href: "/aloqa", label: "Aloqa" },
-];
+/** Current language, read from the URL (/ru/…, /en/…, otherwise Uzbek). */
+export function useLang() {
+  const { lang, path } = splitPath(usePathname());
+  return { lang, path, t: dict(lang), to: (p: string) => lp(lang, p) };
+}
+
+const NAV = [
+  { href: "/", key: "home" },
+  { href: "/portfolio", key: "portfolio" },
+  { href: "/xizmatlar", key: "services" },
+  { href: "/biz-haqimizda", key: "about" },
+  { href: "/aloqa", key: "contact" },
+] as const;
 
 const isActive = (path: string, href: string) => (href === "/" ? path === "/" : path.startsWith(href) || (href === "/portfolio" && path.startsWith("/proyekt")));
 
 /* ---------- header + mobile menu ---------- */
 export function Header() {
-  const path = usePathname();
+  const { lang, path, t, to } = useLang();
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState("UZ");
-  useEffect(() => setOpen(false), [path]);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { setOpen(false); setLangOpen(false); }, [path, lang]);
+  // the root layout only sets <html lang> on a full load; keep it right on client-side switches
+  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); setLangOpen(false); } };
     addEventListener("keydown", onKey);
     return () => removeEventListener("keydown", onKey);
   }, [open]);
+  useEffect(() => {
+    if (!langOpen) return;
+    const away = (e: PointerEvent) => { if (!langRef.current?.contains(e.target as Node)) setLangOpen(false); };
+    addEventListener("pointerdown", away);
+    return () => removeEventListener("pointerdown", away);
+  }, [langOpen]);
+
+  const langLinks = (className: string) =>
+    LANGS.map((l) => (
+      <Link key={l} href={lp(l, path)} hrefLang={l} lang={l} className={`${className}${l === lang ? " active" : ""}`} aria-current={l === lang ? "true" : undefined}>
+        <b>{l.toUpperCase()}</b><span>{LANG_LABELS[l]}</span>
+      </Link>
+    ));
 
   return (
     <>
       <header className="site-header">
         <div className="container">
-          <nav className="nav" aria-label="Asosiy menyu">
-            <Link href="/" className="logo" aria-label="ABD Group bosh sahifa">
+          <nav className="nav" aria-label={t.nav.mainMenu}>
+            <Link href={to("/")} className="logo" aria-label={t.nav.logoHome}>
               <img src="/img/logo.svg" alt="ABD Group" width={58} height={30} />
             </Link>
             <ul className="nav-links">
               {NAV.map((n) => (
                 <li key={n.href}>
-                  <Link href={n.href} className={isActive(path, n.href) ? "active" : ""}><Roll>{n.label}</Roll></Link>
+                  <Link href={to(n.href)} className={isActive(path, n.href) ? "active" : ""}><Roll>{t.nav[n.key]}</Roll></Link>
                 </li>
               ))}
             </ul>
             <div className="nav-actions">
-              <button className="lang-btn" type="button" onClick={() => { const l = ["UZ", "RU", "EN"]; const next = l[(l.indexOf(lang) + 1) % 3]; setLang(next); window.abdToast?.(`Til: ${next} (demo)`); }}>{lang}</button>
-              <Link href="/aloqa" className="btn btn-primary btn-sm"><Roll>Loyiha boshlash</Roll></Link>
-              <button className="burger" type="button" aria-label={open ? "Menyuni yopish" : "Menyuni ochish"} aria-expanded={open} onClick={() => setOpen((o) => !o)}><span /><span /></button>
+              <div className={`lang-switch${langOpen ? " open" : ""}`} ref={langRef}>
+                <button className="lang-btn" type="button" aria-haspopup="true" aria-expanded={langOpen} aria-label={t.nav.language} onClick={() => setLangOpen((o) => !o)}>
+                  {lang.toUpperCase()}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </button>
+                <div className="lang-menu">{langLinks("lang-opt")}</div>
+              </div>
+              <Link href={to("/aloqa")} className="btn btn-primary btn-sm"><Roll>{t.nav.start}</Roll></Link>
+              <button className="burger" type="button" aria-label={open ? t.nav.closeMenu : t.nav.openMenu} aria-expanded={open} onClick={() => setOpen((o) => !o)}><span /><span /></button>
             </div>
           </nav>
         </div>
       </header>
       <div className="mobile-menu" aria-hidden={!open}>
         {NAV.map((n) => (
-          <Link key={n.href} href={n.href} className={isActive(path, n.href) ? "active" : ""} tabIndex={open ? 0 : -1}>{n.label}</Link>
+          <Link key={n.href} href={to(n.href)} className={isActive(path, n.href) ? "active" : ""} tabIndex={open ? 0 : -1}>{t.nav[n.key]}</Link>
         ))}
+        <div className="mobile-langs">{langLinks("m-lang")}</div>
       </div>
     </>
   );
@@ -109,6 +140,7 @@ export function FaqList({ items }: { items: Faq[] }) {
 
 /* ---------- testimonials slider ---------- */
 export function Testimonials({ items }: { items: Testimonial[] }) {
+  const { t } = useLang();
   const track = useRef<HTMLDivElement>(null);
   const [idx, setIdx] = useState(0);
   const [per, setPer] = useState(3);
@@ -152,9 +184,9 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
         </div>
       </div>
       <div className="testi-nav">
-        <button className="round-btn" type="button" aria-label="Oldingi" onClick={() => go(idx - 1)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 18l-6-6 6-6" /></svg></button>
-        <div className="dots">{Array.from({ length: max + 1 }, (_, i) => <button key={i} type="button" aria-label={`Slayd ${i + 1}`} className={i === Math.min(idx, max) ? "active" : ""} onClick={() => go(i)} />)}</div>
-        <button className="round-btn" type="button" aria-label="Keyingi" onClick={() => go(idx + 1)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg></button>
+        <button className="round-btn" type="button" aria-label={t.testi.prev} onClick={() => go(idx - 1)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 18l-6-6 6-6" /></svg></button>
+        <div className="dots">{Array.from({ length: max + 1 }, (_, i) => <button key={i} type="button" aria-label={`${t.testi.slide} ${i + 1}`} className={i === Math.min(idx, max) ? "active" : ""} onClick={() => go(i)} />)}</div>
+        <button className="round-btn" type="button" aria-label={t.testi.next} onClick={() => go(idx + 1)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg></button>
       </div>
     </>
   );
@@ -163,24 +195,25 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
 /* ---------- portfolio grid with filters ---------- */
 const SIZES = ["w-5 tall", "w-7", "w-7", "w-5", "w-4", "w-4", "w-4", "w-7", "w-5", "w-6", "w-6", "w-12"];
 export function PortfolioGrid({ projects }: { projects: Project[] }) {
+  const { lang, t } = useLang();
   const [cat, setCat] = useState<string>("all");
   const [gen, setGen] = useState(0);
   const shown = cat === "all" ? projects : projects.filter((p) => p.category === cat);
   return (
     <>
-      <div className="filters" role="toolbar" aria-label="Kategoriya" data-reveal="">
+      <div className="filters" role="toolbar" aria-label={t.portfolio.filterLabel} data-reveal="">
         {["all", ...CATEGORIES].map((c) => (
           <button key={c} type="button" className={`filter${cat === c ? " active" : ""}`} onClick={() => { setCat(c); setGen((g) => g + 1); }}>
-            {c === "all" ? "Barchasi" : CATEGORY_LABELS[c as keyof typeof CATEGORY_LABELS]}
+            {t.categories[c as keyof typeof t.categories]}
           </button>
         ))}
       </div>
       <div className="works" key={gen}>
         {shown.map((p, i) => (
           // after a filter click the cards are new DOM nodes: show them right away with a pop-in
-          <WorkCard key={p.id} p={p} size={`${SIZES[i % SIZES.length]}${gen ? " in pop" : ""}`} delay={gen ? 0 : (i % 3) * 0.1} />
+          <WorkCard key={p.id} p={p} lang={lang} size={`${SIZES[i % SIZES.length]}${gen ? " in pop" : ""}`} delay={gen ? 0 : (i % 3) * 0.1} />
         ))}
-        {!shown.length && <p className="empty-note">Bu toifada hozircha loyiha yo'q.</p>}
+        {!shown.length && <p className="empty-note">{t.portfolio.empty}</p>}
       </div>
     </>
   );
@@ -188,22 +221,25 @@ export function PortfolioGrid({ projects }: { projects: Project[] }) {
 
 /* ---------- contact form ---------- */
 export function ContactForm({ services }: { services: { value: string; label: string }[] }) {
+  const { lang, t } = useLang();
+  const f = t.form;
   const [state, action, pending] = useActionState<ActionState, FormData>(submitContact, null);
   if (state?.ok)
     return (
       <div className="card form">
         <div className="form-success" style={{ display: "block" }}>
           <div className="check"><svg width="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M20 6 9 17l-5-5" /></svg></div>
-          <h3 className="h-2">Rahmat!</h3>
+          <h3 className="h-2">{f.thanks}</h3>
           <p className="lead" style={{ margin: "12px auto 0" }}>{state.message}</p>
         </div>
       </div>
     );
   return (
     <form className="card form" action={action} data-reveal="" data-delay=".1">
-      <h2 className="h-2">Loyiha haqida</h2>
+      <input type="hidden" name="lang" value={lang} />
+      <h2 className="h-2">{f.title}</h2>
       <div>
-        <span className="form-label">Sizga nima kerak?</span>
+        <span className="form-label">{f.need}</span>
         <div className="chips">
           {services.map((s, i) => (
             <span key={s.value}><input type="checkbox" id={`c${i}`} name="services" value={s.label} /><label htmlFor={`c${i}`}>{s.label}</label></span>
@@ -211,35 +247,37 @@ export function ContactForm({ services }: { services: { value: string; label: st
         </div>
       </div>
       <div className="form-row">
-        <div className="field"><input id="f-name" name="name" required placeholder=" " autoComplete="name" maxLength={120} /><label htmlFor="f-name">Ismingiz</label></div>
-        <div className="field"><input id="f-phone" name="phone" type="tel" required placeholder=" " autoComplete="tel" maxLength={40} /><label htmlFor="f-phone">Telefon raqam</label></div>
+        <div className="field"><input id="f-name" name="name" required placeholder=" " autoComplete="name" maxLength={120} /><label htmlFor="f-name">{f.name}</label></div>
+        <div className="field"><input id="f-phone" name="phone" type="tel" required placeholder=" " autoComplete="tel" maxLength={40} /><label htmlFor="f-phone">{f.phone}</label></div>
       </div>
-      <div className="field"><input id="f-email" name="email" type="email" placeholder=" " autoComplete="email" maxLength={160} /><label htmlFor="f-email">Email (ixtiyoriy)</label></div>
+      <div className="field"><input id="f-email" name="email" type="email" placeholder=" " autoComplete="email" maxLength={160} /><label htmlFor="f-email">{f.email}</label></div>
       <div>
-        <span className="form-label">Taxminiy byudjet</span>
+        <span className="form-label">{f.budget}</span>
         <div className="chips">
-          {["$1k gacha", "$1k – $5k", "$5k – $15k", "$15k+"].map((b, i) => (
+          {f.budgets.map((b, i) => (
             <span key={b}><input type="radio" id={`b${i}`} name="budget" value={b} /><label htmlFor={`b${i}`}>{b}</label></span>
           ))}
         </div>
       </div>
-      <div className="field"><textarea id="f-msg" name="text" placeholder=" " maxLength={4000} /><label htmlFor="f-msg">Loyiha haqida qisqacha</label></div>
+      <div className="field"><textarea id="f-msg" name="text" placeholder=" " maxLength={4000} /><label htmlFor="f-msg">{f.message}</label></div>
       {/* honeypot: real people never see or fill this */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" style={{ position: "absolute", left: "-9999px" }} aria-hidden="true" />
       {state && !state.ok && <p className="form-error" role="alert">{state.message}</p>}
-      <button className="btn btn-primary" type="submit" style={{ justifySelf: "start" }} disabled={pending}><Roll>{pending ? "Yuborilmoqda…" : "Yuborish"}</Roll></button>
+      <button className="btn btn-primary" type="submit" style={{ justifySelf: "start" }} disabled={pending}><Roll>{pending ? f.sending : f.send}</Roll></button>
     </form>
   );
 }
 
 /* ---------- footer newsletter ---------- */
 export function Newsletter() {
+  const { lang, t } = useLang();
   const [state, action, pending] = useActionState<ActionState, FormData>(subscribe, null);
   useEffect(() => { if (state?.message) window.abdToast?.(state.message); }, [state]);
   return (
     <form action={action} key={state?.ok ? "sent" : "form"}>
+      <input type="hidden" name="lang" value={lang} />
       <input type="email" name="email" required placeholder="example@gmail.com" aria-label="Email" maxLength={160} />
-      <button className="btn btn-primary btn-sm" type="submit" disabled={pending}>Yuborish</button>
+      <button className="btn btn-primary btn-sm" type="submit" disabled={pending}>{t.footer.send}</button>
     </form>
   );
 }

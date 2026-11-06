@@ -1,5 +1,6 @@
 import { readContent } from "@/lib/store";
 import { ActionForm } from "@/components/admin/forms";
+import { TrFields } from "@/components/admin/TrFields";
 import { saveSettings } from "../../actions";
 
 export const metadata = { title: "Sozlamalar" };
@@ -20,6 +21,11 @@ export default async function SettingsAdmin() {
             <textarea name="heroWords" defaultValue={s.heroWords.join("\n")} style={{ minHeight: 130 }} />
             <small className="a-hint">Har bir qatorga bitta so&apos;z yoki ibora</small>
           </label>
+          <span className="a-section-title">Tarjimalar</span>
+          <TrFields tr={s.tr} fields={[
+            { name: "heroWords", label: "Almashinadigan so'zlar (har qatorga bittadan)", kind: "lines", max: 1000 },
+            { name: "address", label: "Manzil", max: 160 },
+          ]} />
         </div>
         <div className="a-card">
           <h2>Raqamlar</h2>

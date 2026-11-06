@@ -1,3 +1,5 @@
+import type { Tr } from "./i18n";
+
 export const CATEGORIES = ["web", "mobile", "branding", "crm"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -38,12 +40,16 @@ export type Project = {
   gallery: string[];
   published: boolean;
   order: number;
+  tr?: Tr<ProjectText>;
 };
 
+/** Project fields that have RU/EN versions. */
+export type ProjectText = Pick<Project, "name" | "type" | "duration" | "description" | "task" | "solution" | "services" | "results">;
+
 export type Client = { id: string; name: string; logo: string | null; url: string; order: number };
-export type Faq = { id: string; question: string; answer: string; order: number };
-export type Member = { id: string; name: string; role: string; photo: string | null; color: string; order: number };
-export type Testimonial = { id: string; name: string; role: string; text: string; color: string; order: number };
+export type Faq = { id: string; question: string; answer: string; order: number; tr?: Tr<{ question: string; answer: string }> };
+export type Member = { id: string; name: string; role: string; photo: string | null; color: string; order: number; tr?: Tr<{ role: string }> };
+export type Testimonial = { id: string; name: string; role: string; text: string; color: string; order: number; tr?: Tr<{ role: string; text: string }> };
 
 export type Message = {
   id: string;
@@ -66,6 +72,7 @@ export type Settings = {
   email: string;
   telegram: string;
   address: string;
+  tr?: Tr<{ heroWords: string[]; address: string }>;
 };
 
 export type Content = {
