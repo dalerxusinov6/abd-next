@@ -97,7 +97,7 @@ body.is-leaving .page-curtain .curtain-logo { opacity: 1; transition-delay: .35s
 .logo small { display: none; }
 .nav-links { display: flex; gap: 4px; list-style: none; }
 .nav-links a {
-  position: relative; display: block; padding: 9px 16px; border-radius: 999px;
+  position: relative; display: block; padding: 8px 16px 10px; border-radius: 999px;
   font-size: 14px; font-weight: 500; color: var(--muted);
   transition: color .3s, background-color .3s;
 }
