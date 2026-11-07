@@ -7,6 +7,7 @@ import { dict } from "@/lib/dict";
 import { indexable, jsonLd, organizationLd, siteUrl } from "@/lib/seo";
 import { FooterWord, Header, Newsletter } from "@/components/site/client";
 import SiteEffects from "@/components/site/SiteEffects";
+import YandexMetrika from "@/components/site/YandexMetrika";
 
 export const dynamic = "force-dynamic";
 
@@ -85,6 +86,7 @@ export default async function SiteLayout({ children, params }: Props) {
       <div className="toast" role="status" aria-live="polite" />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationLd(lang, loc(settings, lang)))} />
       <SiteEffects />
+      {indexable() && <YandexMetrika />}
     </>
   );
 }
