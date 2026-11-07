@@ -4,11 +4,12 @@ import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { checkPassword, createSession, destroySession, isConfigured, rateLimited, requireAdmin } from "@/lib/auth";
-import { newId, slugify, updateContent } from "@/lib/store";
+import { newId, readContent, slugify, updateContent } from "@/lib/store";
 import { deleteUpload, saveUpload, UploadError } from "@/lib/uploads";
 import { CATEGORIES, VISUALS, type ActionState, type Category, type Content, type Result, type Visual } from "@/lib/types";
 import { EXTRA_LANGS, type Tr } from "@/lib/i18n";
 import { toNewLatin } from "@/lib/uzLatin";
+import { canTranslate, translateFields, type Fields } from "@/lib/translate";
 
 /* ---------- helpers ---------- */
 const s = (fd: FormData, k: string, max = 500) => String(fd.get(k) ?? "").trim().slice(0, max);
@@ -34,6 +35,49 @@ function readTr<T>(fd: FormData, spec: TrSpec): Tr<T> | undefined {
     if (Object.keys(one).length) out[l] = one;
   }
   return Object.keys(out).length ? (out as Tr<T>) : undefined;
+}
+
+/*
+ * Fills the RU/EN versions of Uzbek fields automatically (Claude, see lib/translate.ts).
+ * A field is (re)translated for a language when:
+ *   - its translation is empty, or
+ *   - the Uzbek text changed and the translation was left as it was (so it is stale), or
+ *   - the admin ticked "re-translate everything" (tr_redo).
+ * A translation the admin typed or edited in the same save is never overwritten.
+ */
+type TrObj = Partial<Record<"ru" | "en", Record<string, unknown>>>;
+const isEmpty = (v: unknown) => v == null || (typeof v === "string" ? !v.trim() : Array.isArray(v) ? !v.some((x) => String(x).trim()) : false);
+const same = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+
+async function autoTr(fd: FormData, now: Fields, before: Fields | undefined, tr: TrObj | undefined, trBefore: TrObj | undefined, context: string): Promise<{ tr: TrObj | undefined; note?: string }> {
+  if (!canTranslate()) return { tr };
+  const redo = fd.get("tr_redo") === "on";
+  const need: Record<"ru" | "en", string[]> = { ru: [], en: [] };
+  for (const [f, v] of Object.entries(now)) {
+    if (isEmpty(v)) continue;
+    const changed = before !== undefined && !same(before[f], v);
+    for (const l of EXTRA_LANGS) {
+      const sub = tr?.[l]?.[f];
+      if (redo || isEmpty(sub) || (changed && same(sub, trBefore?.[l]?.[f]))) need[l].push(f);
+    }
+  }
+  const keys = [...new Set([...need.ru, ...need.en])];
+  if (!keys.length) return { tr };
+  try {
+    const got = await translateFields(Object.fromEntries(keys.map((k) => [k, now[k]])), context);
+    const out: TrObj = structuredClone(tr ?? {});
+    for (const l of EXTRA_LANGS) for (const f of need[l]) {
+      const v = got[l]?.[f];
+      if (isEmpty(v)) continue;
+      // a list must keep its length (e.g. services, result labels)
+      if (Array.isArray(now[f]) && (!Array.isArray(v) || v.length !== (now[f] as string[]).length)) continue;
+      (out[l] ??= {})[f] = v;
+    }
+    return { tr: Object.keys(out).length ? out : undefined };
+  } catch (e) {
+    console.error("[admin] auto-translation failed", e);
+    return { tr, note: "Saqlandi, lekin avtomatik tarjima ishlamadi — RU/EN maydonlarini qo'lda to'ldiring yoki qayta saqlang." };
+  }
 }
 
 const refresh = () => revalidatePath("/", "layout");
@@ -116,6 +160,32 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
     const values = pick("value"), labels = pick("label");
     if ([...values, ...labels].some(Boolean)) one.results = results.map((r, i): Result => ({ value: values[i] || r.value, label: labels[i] || r.label }));
   }
+  // Uzbek texts, then their RU/EN versions (results as two lists so they translate in one go)
+  const text = {
+    type: uz(fd, "type", 60) || "Loyiha",
+    duration: uz(fd, "duration", 40),
+    description: uz(fd, "description", 600),
+    task: uz(fd, "task", 3000),
+    solution: uz(fd, "solution", 3000),
+    services: uz(fd, "services", 600).split(",").map((x) => x.trim()).filter(Boolean).slice(0, 12),
+  };
+  const asFields = (t: Record<string, unknown> | undefined, res: Result[] | undefined): Fields | undefined => t && ({
+    ...Object.fromEntries(["type", "duration", "description", "task", "solution", "services"].map((k) => [k, t[k] as string | string[]])),
+    resultLabels: (res ?? []).map((r) => r.label), resultValues: (res ?? []).map((r) => r.value),
+  });
+  const trAsFields = (t: TrObj | undefined) => t && Object.fromEntries(Object.entries(t).map(([l, v]) => {
+    const { results: res, ...rest } = (v ?? {}) as Record<string, unknown> & { results?: Result[] };
+    return [l, res ? { ...rest, resultLabels: res.map((r) => r.label), resultValues: res.map((r) => r.value) } : rest];
+  })) as TrObj;
+  const prev = id ? (await readContent()).projects.find((p) => p.id === id) : undefined;
+  const auto = await autoTr(fd, asFields(text, results)!, prev && asFields(prev as unknown as Record<string, unknown>, prev.results), trAsFields(tr as TrObj), trAsFields(prev?.tr as TrObj), `portfolio project "${name}"`);
+  // back from two lists to results; a missing value/label falls back to the Uzbek one
+  const trFinal = auto.tr && Object.fromEntries(Object.entries(auto.tr).map(([l, v]) => {
+    const { resultLabels, resultValues, ...rest } = (v ?? {}) as Record<string, unknown> & { resultLabels?: string[]; resultValues?: string[] };
+    const hasRes = (resultLabels?.length || resultValues?.length) && results.length;
+    return [l, hasRes ? { ...rest, results: results.map((r, i): Result => ({ value: resultValues?.[i] || r.value, label: resultLabels?.[i] || r.label })) } : rest];
+  }));
+
   const removeGallery = new Set(fd.getAll("gallery_remove").map(String));
   const toDelete: (string | null)[] = [];
   let savedId = id;
@@ -128,22 +198,22 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
 
     const base = {
       slug, name,
-      type: uz(fd, "type", 60) || "Loyiha",
+      type: text.type,
       category: (CATEGORIES as readonly string[]).includes(category) ? category : "web",
       year: int(fd, "year", new Date().getFullYear()),
-      duration: uz(fd, "duration", 40),
+      duration: text.duration,
       url: safeUrl(s(fd, "url", 300)),
-      description: uz(fd, "description", 600),
-      task: uz(fd, "task", 3000),
-      solution: uz(fd, "solution", 3000),
-      services: uz(fd, "services", 600).split(",").map((x) => x.trim()).filter(Boolean).slice(0, 12),
+      description: text.description,
+      task: text.task,
+      solution: text.solution,
+      services: text.services,
       results,
       color: color(fd, "color", "#1d3b8b"),
       accent: color(fd, "accent", "#00c8ff"),
       visual: (VISUALS as readonly string[]).includes(visual) ? visual : "logo",
       logoText: s(fd, "logoText", 60),
       published: fd.get("published") === "on",
-      tr: tr as Content["projects"][number]["tr"],
+      tr: trFinal as Content["projects"][number]["tr"],
     } as const;
 
     if (existing) {
@@ -161,7 +231,7 @@ export async function saveProject(_prev: ActionState, fd: FormData): Promise<Act
   await Promise.all(toDelete.map(deleteUpload));
   refresh();
   if (!id) redirect(`/admin/projects/${savedId}?created=1`);
-  return done("Loyiha saqlandi");
+  return done(auto.note ?? "Loyiha saqlandi");
 }
 
 export async function deleteProject(fd: FormData) {
@@ -227,15 +297,18 @@ export async function saveFaq(_prev: ActionState, fd: FormData): Promise<ActionS
   await requireAdmin();
   const id = s(fd, "id", 40), question = uz(fd, "question", 300), answer = uz(fd, "answer", 3000);
   if (!question || !answer) return fail("Savol va javobni to'ldiring.");
+  const prev = id ? (await readContent()).faq.find((x) => x.id === id) : undefined;
+  const auto = await autoTr(fd, { question, answer }, prev && { question: prev.question, answer: prev.answer },
+    readTr(fd, { question: { max: 300 }, answer: { max: 3000 } }) as TrObj, prev?.tr as TrObj, "FAQ question and answer on the website");
+  const tr = auto.tr as Content["faq"][number]["tr"];
   const err = await save((c) => {
     const ex = id ? c.faq.find((x) => x.id === id) : undefined;
-    const tr = readTr<{ question: string; answer: string }>(fd, { question: { max: 300 }, answer: { max: 3000 } });
     if (ex) Object.assign(ex, { question, answer, tr });
     else c.faq.push({ id: newId("f"), question, answer, tr, order: nextOrder(c.faq) });
   });
   if (err) return err;
   refresh();
-  return done(id ? "Savol saqlandi" : "Savol qo'shildi");
+  return done(auto.note ?? (id ? "Savol saqlandi" : "Savol qo'shildi"));
 }
 export async function deleteFaq(fd: FormData) { await requireAdmin(); await updateContent((c) => { c.faq = c.faq.filter((x) => x.id !== s(fd, "id", 40)); }); refresh(); }
 export async function moveFaq(fd: FormData) { await requireAdmin(); await updateContent((c) => move(c.faq, s(fd, "id", 40), int(fd, "dir"))); refresh(); }
@@ -245,7 +318,11 @@ export async function saveTestimonial(_prev: ActionState, fd: FormData): Promise
   await requireAdmin();
   const id = s(fd, "id", 40), name = s(fd, "name", 120), text = uz(fd, "text", 1200);
   if (!name || !text) return fail("Ism va fikr matnini kiriting.");
-  const data = { name, text, role: uz(fd, "role", 160), color: color(fd, "color", "#00c8ff"), tr: readTr<{ role: string; text: string }>(fd, { role: { max: 160 }, text: { max: 1200 } }) };
+  const role = uz(fd, "role", 160);
+  const prev = id ? (await readContent()).testimonials.find((x) => x.id === id) : undefined;
+  const auto = await autoTr(fd, { role, text }, prev && { role: prev.role, text: prev.text },
+    readTr(fd, { role: { max: 160 }, text: { max: 1200 } }) as TrObj, prev?.tr as TrObj, `client review by ${name}; "role" is their job title and company`);
+  const data = { name, text, role, color: color(fd, "color", "#00c8ff"), tr: auto.tr as Content["testimonials"][number]["tr"] };
   const err = await save((c) => {
     const ex = id ? c.testimonials.find((x) => x.id === id) : undefined;
     if (ex) Object.assign(ex, data);
@@ -253,7 +330,7 @@ export async function saveTestimonial(_prev: ActionState, fd: FormData): Promise
   });
   if (err) return err;
   refresh();
-  return done(id ? "Fikr saqlandi" : "Fikr qo'shildi");
+  return done(auto.note ?? (id ? "Fikr saqlandi" : "Fikr qo'shildi"));
 }
 export async function deleteTestimonial(fd: FormData) { await requireAdmin(); await updateContent((c) => { c.testimonials = c.testimonials.filter((x) => x.id !== s(fd, "id", 40)); }); refresh(); }
 export async function moveTestimonial(fd: FormData) { await requireAdmin(); await updateContent((c) => move(c.testimonials, s(fd, "id", 40), int(fd, "dir"))); refresh(); }
@@ -265,7 +342,11 @@ export async function saveMember(_prev: ActionState, fd: FormData): Promise<Acti
   if (!name) return fail("Ismni kiriting.");
   let photo: string | null;
   try { photo = await saveUpload(fd.get("photo")); } catch (e) { if (e instanceof UploadError) return fail(e.message); throw e; }
-  const data = { name, role: uz(fd, "role", 120), color: color(fd, "color", "#0e7490"), tr: readTr<{ role: string }>(fd, { role: { max: 120 } }) };
+  const role = uz(fd, "role", 120);
+  const prev = id ? (await readContent()).team.find((x) => x.id === id) : undefined;
+  const auto = await autoTr(fd, { role }, prev && { role: prev.role }, readTr(fd, { role: { max: 120 } }) as TrObj, prev?.tr as TrObj,
+    "job title of a team member (keep common English titles like Art Director in English for the English version)");
+  const data = { name, role, color: color(fd, "color", "#0e7490"), tr: auto.tr as Content["team"][number]["tr"] };
   let old: string | null = null;
   const err = await save((c) => {
     const ex = id ? c.team.find((x) => x.id === id) : undefined;
@@ -277,7 +358,7 @@ export async function saveMember(_prev: ActionState, fd: FormData): Promise<Acti
   if (err) return err;
   await deleteUpload(old);
   refresh();
-  return done(id ? "Saqlandi" : "Jamoa a'zosi qo'shildi");
+  return done(auto.note ?? (id ? "Saqlandi" : "Jamoa a'zosi qo'shildi"));
 }
 export async function deleteMember(fd: FormData) {
   await requireAdmin();
@@ -310,17 +391,22 @@ export async function saveSettings(_prev: ActionState, fd: FormData): Promise<Ac
   await requireAdmin();
   const words = uz(fd, "heroWords", 1000).split("\n").map((w) => w.trim()).filter(Boolean).slice(0, 10);
   if (!words.length) return fail("Kamida bitta hero so'zini kiriting.");
+  const address = uz(fd, "address", 160);
+  const prev = (await readContent()).settings;
+  const auto = await autoTr(fd, { heroWords: words, address }, { heroWords: prev.heroWords, address: prev.address },
+    readTr(fd, { heroWords: { max: 1000, kind: "lines" }, address: { max: 160 } }) as TrObj, prev.tr as TrObj,
+    'heroWords are short plural nouns completing the headline "We build ___ for your business" / "Создаём ___ для вашего бизнеса" (Russian in the accusative, lowercase); address is the company city and country');
   const settings: Content["settings"] = {
     heroWords: words,
     stats: { projects: int(fd, "projects"), clients: int(fd, "clients"), years: int(fd, "years"), team: int(fd, "team") },
     phone: s(fd, "phone", 40),
     email: s(fd, "email", 160),
     telegram: s(fd, "telegram", 60).replace(/^@/, ""),
-    address: uz(fd, "address", 160),
-    tr: readTr<{ heroWords: string[]; address: string }>(fd, { heroWords: { max: 1000, kind: "lines" }, address: { max: 160 } }),
+    address,
+    tr: auto.tr as Content["settings"]["tr"],
   };
   const err = await save((c) => { c.settings = settings; });
   if (err) return err;
   refresh();
-  return done("Sozlamalar saqlandi");
+  return done(auto.note ?? "Sozlamalar saqlandi");
 }

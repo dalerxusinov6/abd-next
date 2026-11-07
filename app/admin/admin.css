@@ -135,3 +135,5 @@
 .a-tr-count.full { background: rgba(74,222,128,.12); color: #4ade80; }
 .a-tr-count.empty { color: var(--dim); }
 .a-tr-lang > .a-form { padding: 4px 14px 14px; }
+.a-tr-auto { display: grid; gap: 6px; }
+.a-tr-auto .a-check { font-size: 13px; color: var(--muted); }

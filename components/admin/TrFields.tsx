@@ -3,7 +3,7 @@ import { EXTRA_LANGS, type ExtraLang } from "@/lib/i18n";
 /*
  * Russian / English versions of a form's text fields, folded under the Uzbek
  * original. Inputs are named "tr.ru.<field>" / "tr.en.<field>"; readTr() in
- * app/admin/actions.ts reads them back. Empty fields fall back to Uzbek on the site.
+ * app/admin/actions.ts reads them back, and autoTr() fills empty ones with Claude.
  */
 export type TrField = {
   name: string;
@@ -51,7 +51,14 @@ export function TrFields({ fields, tr, compact }: {
           </details>
         );
       })}
-      <small className="a-hint">Bo&apos;sh qoldirilgan maydon saytda o&apos;zbekcha ko&apos;rinadi.</small>
+      {process.env.ANTHROPIC_API_KEY ? (
+        <div className="a-tr-auto">
+          <small className="a-hint">Bo&apos;sh maydonlar saqlaganda avtomatik tarjima qilinadi. O&apos;zbekcha matnni o&apos;zgartirsangiz, tarjimasi ham yangilanadi; o&apos;zingiz yozgan tarjimaga tegilmaydi.</small>
+          <label className="a-check"><input type="checkbox" name="tr_redo" /> Hammasini qaytadan tarjima qilish</label>
+        </div>
+      ) : (
+        <small className="a-hint">Bo&apos;sh qoldirilgan maydon saytda o&apos;zbekcha ko&apos;rinadi. (Avtomatik tarjima uchun serverda ANTHROPIC_API_KEY kerak.)</small>
+      )}
     </div>
   );
 }
